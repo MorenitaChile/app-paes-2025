@@ -1,39 +1,44 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { JsonDb } from "@/lib/db";
+import { JsonDb } from "./db";
+import bcrypt from 'bcryptjs';
 
 export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
             name: "Credentials",
             credentials: {
-                email: { label: "Email", type: "email", placeholder: "estudiante@ejemplo.com" },
+                email: { label: "Email", type: "email" },
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials) {
-                // For this demo, we'll allow any login with a valid email format
-                // In a real app, you would verify the password hash here
-                if (credentials?.email && credentials?.email.includes("@")) {
-                    // Ensure user exists in our DB
-                    let user = await JsonDb.getUserByEmail(credentials.email);
-
-                    if (!user) {
-                        // Create new user if first time
-                        user = await JsonDb.createUser({
-                            name: credentials.email.split("@")[0],
-                            email: credentials.email,
-                            streak: 0,
-                            lastStudyDate: new Date().toISOString()
-                        });
-                    }
-
-                    return {
-                        id: user.id || "unknown",
-                        name: user.name,
-                        email: user.email,
-                    };
+                if (!credentials?.email || !credentials?.password) {
+                    throw new Error('Email y contraseña son requeridos');
                 }
-                return null;
+
+                // Buscar usuario por email
+                const user = await JsonDb.getUserByEmail(credentials.email);
+
+                if (!user) {
+                    throw new Error('Credenciales inválidas');
+                }
+
+                // Verificar contraseña
+                const isPasswordValid = await bcrypt.compare(
+                    credentials.password,
+                    user.password
+                );
+
+                if (!isPasswordValid) {
+                    throw new Error('Credenciales inválidas');
+                }
+
+                // Retornar usuario sin la contraseña
+                return {
+                    id: user.id,
+                    email: user.email,
+                    name: `${user.name} ${user.lastName}`
+                };
             }
         })
     ],
@@ -46,7 +51,6 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         async session({ session, token }) {
             if (session.user && token.sub) {
-                // Add user ID to session
                 (session.user as any).id = token.sub;
             }
             return session;

@@ -67,6 +67,10 @@ export default function LoginPage() {
                         Ingresar
                     </button>
                 </form>
+
+                <p className={styles.footer}>
+                    ¿No tienes cuenta? <a href="/register">Crear Cuenta</a>
+                </p>
             </div>
         </div>
     );

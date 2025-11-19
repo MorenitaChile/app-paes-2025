@@ -5,11 +5,14 @@ import { sql } from '@vercel/postgres';
 const DB_PATH = path.join(process.cwd(), 'src', 'data', 'db.json');
 
 export type User = {
-    id?: string;
+    id: string;
     name: string;
+    lastName: string;
     email: string;
+    password: string;
     streak: number;
     lastStudyDate: string;
+    createdAt?: string;
 };
 
 export type EssayResult = {
@@ -37,8 +40,11 @@ export type DatabaseSchema = {
 
 const INITIAL_DB: DatabaseSchema = {
     user: {
+        id: 'default-user',
         name: 'Estudiante',
+        lastName: 'PAES',
         email: '',
+        password: '',
         streak: 0,
         lastStudyDate: new Date().toISOString(),
     },
@@ -139,8 +145,10 @@ class PostgresDb {
                 if (userId === DEFAULT_USER_ID) {
                     return {
                         id: DEFAULT_USER_ID,
-                        name: 'Estudiante PAES',
+                        name: 'Estudiante',
+                        lastName: 'PAES',
                         email: 'estudiante@ejemplo.com',
+                        password: '',
                         streak: 0,
                         lastStudyDate: new Date().toISOString()
                     };
@@ -152,7 +160,9 @@ class PostgresDb {
             return {
                 id: user.id,
                 name: user.name,
+                lastName: user.lastName || '',
                 email: user.email,
+                password: user.password || '',
                 streak: user.streak || 0,
                 lastStudyDate: user.lastStudyDate ? new Date(user.lastStudyDate).toISOString() : new Date().toISOString()
             };
@@ -170,7 +180,9 @@ class PostgresDb {
             return {
                 id: user.id,
                 name: user.name,
+                lastName: user.lastName || '',
                 email: user.email,
+                password: user.password || '',
                 streak: user.streak || 0,
                 lastStudyDate: user.lastStudyDate ? new Date(user.lastStudyDate).toISOString() : new Date().toISOString()
             };
