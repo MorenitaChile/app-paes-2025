@@ -68,13 +68,14 @@ export default function RegisterPage() {
             });
 
             if (result?.error) {
-                setError('Cuenta creada, pero error al iniciar sesión');
-                setLoading(false);
+                // Cuenta creada pero login falló - redirigir a login manual
+                router.push('/login?registered=true');
                 return;
             }
 
             // Redirigir al dashboard
-            router.push('/');
+            router.push('/dashboard');
+            router.refresh();
         } catch (err) {
             setError('Error de conexión');
             setLoading(false);

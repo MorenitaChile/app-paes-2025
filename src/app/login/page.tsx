@@ -1,18 +1,27 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
     const router = useRouter();
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        if (searchParams.get('registered') === 'true') {
+            setSuccess('¡Cuenta creada exitosamente! Ahora puedes iniciar sesión.');
+        }
+    }, [searchParams]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError("");
+        setSuccess("");
 
         const result = await signIn("credentials", {
             redirect: false,
@@ -23,7 +32,7 @@ export default function LoginPage() {
         if (result?.error) {
             setError("Credenciales inválidas. Intenta de nuevo.");
         } else {
-            router.push("/");
+            router.push("/dashboard");
             router.refresh();
         }
     };
@@ -61,6 +70,7 @@ export default function LoginPage() {
                         />
                     </div>
 
+                    {success && <p className={styles.success}>{success}</p>}
                     {error && <p className={styles.error}>{error}</p>}
 
                     <button type="submit" className="btn btn-primary">
