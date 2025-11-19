@@ -20,14 +20,14 @@ export const config = {
     matcher: [
         /*
          * Match all request paths except for the ones starting with:
-         * - / (home/landing page - public)
          * - api/auth (authentication endpoints)
          * - login
          * - register
          * - _next/static (static files)
          * - _next/image (image optimization files)
          * - favicon.ico (favicon file)
+         * And exclude the root path (/)
          */
-        "/((?!api/auth|login|register|_next/static|_next/image|favicon.ico$)(?!^/$).*)",
+        "/((?!api/auth|login|register|_next/static|_next/image|favicon.ico).+)",
     ],
 };
