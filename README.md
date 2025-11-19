@@ -1,36 +1,66 @@
-Este es un proyecto [Next.js](https://nextjs.org) creado con [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# APP PAES 2025 📚🇨🇱
 
-## Empezando
+Aplicación web interactiva diseñada para la preparación de la **Prueba de Acceso a la Educación Superior (PAES) Regular 2025** en Chile.
 
-Primero, ejecuta el servidor de desarrollo:
+Esta herramienta ofrece un entorno de estudio completo con ensayos simulados, material didáctico visual y seguimiento de progreso personalizado.
 
-```bash
-npm run dev
-# o
-yarn dev
-# o
-pnpm dev
-# o
-bun dev
-```
+## 🚀 Características Principales
 
-Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
+### 📝 Banco de Ensayos
+- **5 Ensayos Completos** por asignatura:
+  - Competencia Lectora
+  - Competencia Matemática M1
+  - Competencia Matemática M2
+  - Ciencias (Biología, Física, Química)
+- **Simulación Realista**: Temporizador integrado y formato de preguntas PAES.
+- **Corrección Automática**: Cálculo inmediato de puntaje (escala 100-1000) y retroalimentación detallada.
 
-Puedes empezar a editar la página modificando `app/page.tsx`. La página se actualiza automáticamente a medida que editas el archivo.
+### 📖 Material Didáctico
+- Temario oficial actualizado al proceso de admisión 2026 (Curriculum 2025).
+- **Recursos Visuales**: Diagramas y gráficos explicativos (Célula, Ondas, Geometría, Funciones).
+- Explicaciones teóricas claras y ejemplos resueltos.
 
-Este proyecto utiliza [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) para optimizar y cargar automáticamente [Geist](https://vercel.com/font), una nueva familia de fuentes para Vercel.
+### 📊 Seguimiento de Progreso
+- **Dashboard Personal**: Métricas de rendimiento, racha de estudio y tiempo total.
+- **Historial**: Registro automático de todos los ensayos realizados.
+- **Persistencia Local**: Tus datos se guardan automáticamente en tu dispositivo (sin necesidad de registro).
 
-## Aprende Más
+## 🛠️ Tecnologías Utilizadas
 
-Para aprender más sobre Next.js, echa un vistazo a los siguientes recursos:
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+- **Lenguaje**: TypeScript
+- **Estilos**: CSS Modules con Variables CSS (Diseño Responsivo)
+- **Base de Datos**: JSON DB Local (Sistema de archivos)
+- **Iconos**: Lucide React
 
-- [Documentación de Next.js](https://nextjs.org/docs) - aprende sobre las características y la API de Next.js.
-- [Aprende Next.js](https://nextjs.org/learn) - un tutorial interactivo de Next.js.
+## 💻 Instalación y Uso
 
-Puedes visitar [el repositorio de GitHub de Next.js](https://github.com/vercel/next.js) - ¡tus comentarios y contribuciones son bienvenidos!
+1.  **Clonar el repositorio:**
+    ```bash
+    git clone https://github.com/TU_USUARIO/app-paes-2025.git
+    cd app-paes-2025
+    ```
 
-## Desplegar en Vercel
+2.  **Instalar dependencias:**
+    ```bash
+    npm install
+    ```
 
-La forma más fácil de desplegar tu aplicación Next.js es usar la [Plataforma Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) de los creadores de Next.js.
+3.  **Iniciar el servidor de desarrollo:**
+    ```bash
+    npm run dev
+    ```
 
-Consulta nuestra [documentación de despliegue de Next.js](https://nextjs.org/docs/app/building-your-application/deploying) para más detalles.
+4.  **Abrir en el navegador:**
+    Visita [http://localhost:3000](http://localhost:3000) para comenzar a estudiar.
+
+## 📂 Estructura del Proyecto
+
+- `/src/app`: Rutas y páginas de la aplicación.
+- `/src/components`: Componentes reutilizables (UI).
+- `/src/data`: Base de conocimientos (Preguntas, Contenido, Syllabus).
+- `/src/lib`: Lógica de negocio (Puntuación, Base de datos).
+- `/public/images`: Recursos gráficos generados.
+
+---
+*Proyecto desarrollado con asistencia de IA para potenciar el estudio autónomo.*
