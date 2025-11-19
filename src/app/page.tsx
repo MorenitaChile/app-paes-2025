@@ -1,51 +1,93 @@
-import ProgressCard from "@/components/Dashboard/ProgressCard";
-import styles from "./page.module.css";
+import Link from 'next/link';
+import styles from './page.module.css';
 
-export default function Home() {
+export default function LandingPage() {
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <h1 className={styles.title}>Hola, Estudiante</h1>
-        <p className={styles.subtitle}>Aquí está tu resumen de progreso para la PAES 2025</p>
-      </header>
-
-      <div className={styles.grid}>
-        <ProgressCard
-          title="Promedio General"
-          value="650"
-          description="+15 pts esta semana"
-        />
-        <ProgressCard
-          title="Ensayos Completados"
-          value="12"
-          description="3 esta semana"
-        />
-        <ProgressCard
-          title="Material Estudiado"
-          value="45%"
-          description="Ciencias: 60% | M1: 30%"
-        />
-        <ProgressCard
-          title="Tiempo de Estudio"
-          value="24h"
-          description="Últimos 7 días"
-        />
-      </div>
-
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Continuar Estudiando</h2>
-        <div className={styles.actions}>
-          {/* Placeholder for quick actions */}
-          <div className={styles.actionCard}>
-            <h3>Competencia Lectora</h3>
-            <p>Análisis de textos argumentativos</p>
-          </div>
-          <div className={styles.actionCard}>
-            <h3>Matemática M1</h3>
-            <p>Geometría: Cubos y Paralelepípedos</p>
+      {/* Hero Section */}
+      <section className={styles.hero}>
+        <div className={styles.heroContent}>
+          <h1 className={styles.heroTitle}>
+            Prepárate para la <span className={styles.highlight}>PAES 2025</span>
+          </h1>
+          <p className={styles.heroSubtitle}>
+            La plataforma más completa para alcanzar tu mejor puntaje.
+            Ensayos simulados, material didáctico y seguimiento personalizado.
+          </p>
+          <div className={styles.heroButtons}>
+            <Link href="/register" className={styles.btnPrimary}>
+              Comenzar Gratis
+            </Link>
+            <Link href="/login" className={styles.btnSecondary}>
+              Iniciar Sesión
+            </Link>
           </div>
         </div>
       </section>
+
+      {/* Features Section */}
+      <section className={styles.features}>
+        <h2 className={styles.sectionTitle}>¿Por qué elegirnos?</h2>
+        <div className={styles.featuresGrid}>
+          <div className={styles.featureCard}>
+            <div className={styles.featureIcon}>📝</div>
+            <h3>Ensayos Simulados</h3>
+            <p>Practica con ensayos que replican el formato real de la PAES con cronómetro y puntaje automático.</p>
+          </div>
+          <div className={styles.featureCard}>
+            <div className={styles.featureIcon}>📚</div>
+            <h3>Material Didáctico</h3>
+            <p>Accede a contenido organizado por ejes temáticos con teoría, ejemplos y ejercicios.</p>
+          </div>
+          <div className={styles.featureCard}>
+            <div className={styles.featureIcon}>📊</div>
+            <h3>Seguimiento de Progreso</h3>
+            <p>Visualiza tu evolución, identifica tus fortalezas y áreas de mejora.</p>
+          </div>
+          <div className={styles.featureCard}>
+            <div className={styles.featureIcon}>🎯</div>
+            <h3>Enfoque Personalizado</h3>
+            <p>Estudia a tu ritmo con contenido adaptado al currículum PAES 2025.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Subjects Section */}
+      <section className={styles.subjects}>
+        <h2 className={styles.sectionTitle}>Todas las Materias</h2>
+        <div className={styles.subjectsGrid}>
+          <div className={styles.subjectCard}>
+            <h3>Competencia Lectora</h3>
+            <p>Comprensión, interpretación y evaluación de textos</p>
+          </div>
+          <div className={styles.subjectCard}>
+            <h3>Ciencias</h3>
+            <p>Física, Química y Biología integradas</p>
+          </div>
+          <div className={styles.subjectCard}>
+            <h3>Matemática M1</h3>
+            <p>Números, Álgebra, Geometría y Probabilidad</p>
+          </div>
+          <div className={styles.subjectCard}>
+            <h3>Matemática M2</h3>
+            <p>Funciones, Trigonometría y Geometría Analítica</p>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className={styles.cta}>
+        <h2>¿Listo para comenzar?</h2>
+        <p>Únete a miles de estudiantes que ya están preparándose para la PAES 2025</p>
+        <Link href="/register" className={styles.btnPrimary}>
+          Crear Cuenta Gratis
+        </Link>
+      </section>
+
+      {/* Footer */}
+      <footer className={styles.footer}>
+        <p>© 2025 PAES Prep. Todos los derechos reservados.</p>
+      </footer>
     </div>
   );
 }

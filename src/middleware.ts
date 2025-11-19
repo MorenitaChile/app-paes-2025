@@ -15,11 +15,12 @@ export default withAuth(
     }
 );
 
-// Proteger todas las rutas excepto login y register
+// Proteger todas las rutas excepto la landing page, login y register
 export const config = {
     matcher: [
         /*
          * Match all request paths except for the ones starting with:
+         * - / (home/landing page - public)
          * - api/auth (authentication endpoints)
          * - login
          * - register
@@ -27,6 +28,6 @@ export const config = {
          * - _next/image (image optimization files)
          * - favicon.ico (favicon file)
          */
-        "/((?!api/auth|login|register|_next/static|_next/image|favicon.ico).*)",
+        "/((?!api/auth|login|register|_next/static|_next/image|favicon.ico$)(?!^/$).*)",
     ],
 };

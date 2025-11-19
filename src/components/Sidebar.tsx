@@ -7,7 +7,7 @@ import { useSession, signOut, SessionProvider } from "next-auth/react";
 import styles from "./Sidebar.module.css";
 
 const navItems = [
-  { label: "Dashboard", href: "/" },
+  { label: "Dashboard", href: "/dashboard" },
   { label: "Ensayos", href: "/ensayos" },
   { label: "Material Didáctico", href: "/material" },
   { label: "Progreso", href: "/progreso" },
