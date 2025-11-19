@@ -447,6 +447,7 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
         theory: [
             "Cinemática: Describe el movimiento. MRU (velocidad constante), MRUA (aceleración constante).",
             "Dinámica: Leyes de Newton. 1) Inercia. 2) F=ma. 3) Acción y Reacción.",
+            "Diagrama de Cuerpo Libre (DCL): Representación gráfica de todas las fuerzas que actúan sobre un objeto (Peso, Normal, Tensión, Roce).",
             "Energía Mecánica: Cinética (movimiento) + Potencial (altura). Se conserva en sistemas ideales."
         ],
         examples: [
@@ -454,6 +455,11 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
                 title: "Segunda Ley de Newton",
                 content: "Fuerza necesaria para acelerar 2kg a 3m/s².",
                 solution: "F = m·a = 2kg · 3m/s² = 6 Newton."
+            },
+            {
+                title: "DCL en Plano Inclinado",
+                content: "Un bloque en un plano inclinado. ¿Qué fuerzas actúan?",
+                solution: "Peso (vertical hacia abajo), Normal (perpendicular al plano) y Roce (contrario al movimiento)."
             }
         ],
         quiz: [
@@ -463,6 +469,13 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
                 options: ["9.8 m/s²", "Cero", "Infinita", "Variable"],
                 correct: 1,
                 explanation: "Según F=ma, si F=0, entonces a=0 (está en reposo o MRU)."
+            },
+            {
+                id: 2,
+                text: "¿Hacia dónde apunta siempre la fuerza Normal?",
+                options: ["Hacia abajo", "Hacia el centro de la Tierra", "Perpendicular a la superficie", "En dirección del movimiento"],
+                correct: 2,
+                explanation: "La fuerza Normal es la reacción de la superficie y siempre es perpendicular a ella."
             }
         ]
     },
@@ -570,6 +583,8 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
         id: "herencia",
         theory: [
             "Genética Mendeliana: Leyes de la herencia. Alelos dominantes (A) y recesivos (a).",
+            "Primera Ley (Segregación): Los alelos se separan durante la formación de gametos.",
+            "Segunda Ley (Distribución Independiente): Los alelos de distintos genes se distribuyen de manera independiente.",
             "Genotipo: Constitución genética (AA, Aa, aa). Fenotipo: Expresión física.",
             "Cruzamiento Monohíbrido: Aa x Aa → Proporción fenotípica 3:1."
         ],
@@ -578,6 +593,11 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
                 title: "Cuadro de Punnett",
                 content: "Cruce de dos heterocigotos (Aa). Probabilidad de recesivo (aa).",
                 solution: "1/4 o 25%."
+            },
+            {
+                title: "Dihibridismo",
+                content: "En un cruce AaBb x AaBb, ¿cuál es la proporción fenotípica clásica?",
+                solution: "9:3:3:1 (9 ambos dominantes, 3 y 3 mixtos, 1 ambos recesivos)."
             }
         ],
         quiz: [
@@ -587,6 +607,13 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
                 options: ["Un tipo de célula", "Una variante de un gen", "Un cromosoma", "Una proteína"],
                 correct: 1,
                 explanation: "Los alelos son las formas alternativas que puede tener un mismo gen."
+            },
+            {
+                id: 2,
+                text: "Si cruzamos AA x aa, ¿cómo es la descendencia?",
+                options: ["50% AA, 50% aa", "100% Aa", "100% AA", "100% aa"],
+                correct: 1,
+                explanation: "El padre AA solo da gametos A, y el aa solo gametos a. Toda la F1 será Aa (heterocigota)."
             }
         ]
     },

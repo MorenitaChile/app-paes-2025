@@ -18,20 +18,28 @@ git push
 ## Paso 3: Crear la Base de Datos Postgres
 1.  Una vez creado el proyecto en Vercel, ve a la pestaña **"Storage"** en el menú superior del proyecto.
 2.  Haz clic en el botón **"Create Database"** (o "Connect Store").
-3.  Selecciona **"Postgres"** (Vercel Postgres).
+3.  Selecciona **"Neon"** (es la base de datos Postgres compatible con Vercel).
+    *   **Importante:** Si te pide crear una cuenta en Neon, puedes hacerlo gratis con tu email o GitHub.
 4.  Haz clic en **"Continue"**.
-5.  Acepta los términos y dale un nombre a tu base de datos (ej: `paes-db`).
-6.  Selecciona la región más cercana (ej: `Washington, D.C., USA` suele ser la mejor opción general).
-7.  Haz clic en **"Create"**.
+5.  Dale un nombre a tu base de datos (ej: `paes-db`) y selecciona la región más cercana.
+6.  Haz clic en **"Create"**.
 
-## Paso 4: Conectar la Base de Datos
-1.  Después de crearla, Vercel te preguntará si quieres conectarla a tu proyecto. Asegúrate de que tu proyecto `app-paes-2025` esté seleccionado y haz clic en **"Connect"**.
-2.  Vercel añadirá automáticamente las **Variables de Entorno** (`POSTGRES_URL`, etc.) a tu proyecto.
-3.  **Importante:** Para que estos cambios surtan efecto, debes **Redesplegar** tu aplicación.
-    *   Ve a la pestaña **"Deployments"**.
-    *   Haz clic en el botón de tres puntos (`...`) del último despliegue y selecciona **"Redeploy"**.
+## Paso 4: Configurar Variables de Entorno (IMPORTANTE)
+Para que la autenticación y la base de datos funcionen, necesitas configurar las variables en Vercel.
 
-## Paso 5: Crear las Tablas (Ejecutar SQL)
+1.  Ve a la pestaña **"Settings"** de tu proyecto en Vercel.
+2.  En el menú lateral, selecciona **"Environment Variables"**.
+3.  Agrega las siguientes variables:
+    *   `NEXTAUTH_SECRET`: Genera una clave segura (puedes usar un generador de contraseñas o ejecutar `openssl rand -base64 32` en tu terminal).
+    *   `NEXTAUTH_URL`: La URL de tu sitio en Vercel (ej: `https://app-paes-2025.vercel.app`). *Nota: Durante el despliegue inicial, Vercel asigna una URL. Puedes actualizar esto después.*
+
+## Paso 5: Conectar la Base de Datos
+1.  Ve a la pestaña **"Storage"** en el menú superior.
+2.  Si ya creaste la base de datos (Paso 3), asegúrate de conectarla a tu proyecto.
+3.  Vercel añadirá automáticamente las variables `POSTGRES_URL`, etc.
+4.  **Redesplegar:** Ve a **"Deployments"**, haz clic en los tres puntos del último despliegue y selecciona **"Redeploy"** para que tome las nuevas variables.
+
+## Paso 6: Crear las Tablas (Ejecutar SQL)
 Ahora necesitamos crear la estructura donde se guardarán los datos.
 
 1.  En Vercel, ve nuevamente a la pestaña **"Storage"** y selecciona tu base de datos `paes-db`.

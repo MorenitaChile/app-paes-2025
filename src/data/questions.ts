@@ -268,7 +268,9 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             ]
         }
     ],
+
     m1: [
+        // ... existing m1 essays ...
         {
             id: 'm1-001',
             subject: 'm1',
@@ -383,9 +385,43 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
                     solution: 'Promedio: (5+6+4+5+7)/5 = 27/5 = 5.4. Ordenados: 4, 5, 5, 6, 7. Mediana: 5.0.'
                 }
             ]
+        },
+        {
+            id: 'm1-006',
+            subject: 'm1',
+            title: 'Ensayo M1: Geometría y Datos',
+            description: 'Evaluación integral de ejes de Geometría y Probabilidad',
+            timeLimit: 60,
+            questions: [
+                {
+                    id: 'm1-006-q1',
+                    type: 'multiple-choice',
+                    subject: 'm1',
+                    axis: 'geometria',
+                    topic: 'transformaciones',
+                    difficulty: 'medium',
+                    text: 'Al punto P(2, -3) se le aplica una traslación según el vector v(-1, 4) y luego una reflexión respecto al eje X. ¿Cuáles son las coordenadas finales?',
+                    options: ['(1, 1)', '(1, -1)', '(-1, 1)', '(3, -7)'],
+                    correctAnswer: 1, // (1, -1)
+                    solution: 'Traslación: (2-1, -3+4) = (1, 1). Reflexión eje X: (x, -y) → (1, -1).'
+                },
+                {
+                    id: 'm1-006-q2',
+                    type: 'multiple-choice',
+                    subject: 'm1',
+                    axis: 'probabilidad',
+                    topic: 'probabilidad',
+                    difficulty: 'hard',
+                    text: 'Se lanzan dos dados comunes. ¿Cuál es la probabilidad de que la suma de sus puntos sea mayor que 9?',
+                    options: ['1/6', '1/12', '1/9', '5/36'],
+                    correctAnswer: 0, // 6/36 = 1/6
+                    solution: 'Casos totales: 36. Favorables (suma > 9): (4,6), (5,5), (5,6), (6,4), (6,5), (6,6) → 6 casos. P = 6/36 = 1/6.'
+                }
+            ]
         }
     ],
     m2: [
+        // ... existing m2 essays ...
         {
             id: 'm2-001',
             subject: 'm2',
@@ -503,6 +539,39 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
                         { criteria: 'Cálculo', weight: 0.5, description: 'Sustituye y calcula correctamente' }
                     ],
                     solution: 'P(B|A) = P(A∩B) / P(A) = 0.3 / 0.6 = 0.5.'
+                }
+            ]
+        },
+        {
+            id: 'm2-006',
+            subject: 'm2',
+            title: 'Ensayo M2: Álgebra Avanzada',
+            description: 'Ecuaciones logarítmicas y sistemas complejos',
+            timeLimit: 60,
+            questions: [
+                {
+                    id: 'm2-006-q1',
+                    type: 'multiple-choice',
+                    subject: 'm2',
+                    axis: 'algebra_funciones',
+                    topic: 'logaritmos',
+                    difficulty: 'hard',
+                    text: 'Si log(x) = a y log(y) = b, ¿a qué es igual log(√(x/y³))?',
+                    options: ['(a - 3b)/2', 'a/2 - 3b', '√(a/b³)', '(a - b)/3'],
+                    correctAnswer: 0,
+                    solution: 'log((x/y³)^(1/2)) = 1/2 * (log x - log y³) = 1/2 * (a - 3b).'
+                },
+                {
+                    id: 'm2-006-q2',
+                    type: 'multiple-choice',
+                    subject: 'm2',
+                    axis: 'algebra_funciones',
+                    topic: 'cuadratica',
+                    difficulty: 'medium',
+                    text: '¿Para qué valor de k la ecuación x² + kx + 9 = 0 tiene una única solución real?',
+                    options: ['3', '6', '9', '±6'],
+                    correctAnswer: 3, // ±6
+                    solution: 'Discriminante Δ = b² - 4ac = 0. k² - 4(1)(9) = 0 → k² = 36 → k = ±6.'
                 }
             ]
         }

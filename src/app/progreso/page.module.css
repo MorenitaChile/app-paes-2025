@@ -71,26 +71,7 @@
     transition: width 0.3s;
 }
 
-.historyList {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
 
-.historyItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background: var(--muted-light);
-    border-radius: var(--radius);
-}
-
-.historyInfo {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
 
 .historyTitle {
     font-weight: 600;

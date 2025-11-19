@@ -4,15 +4,19 @@
   --foreground: #0f172a;
   --card-bg: #ffffff;
   --card-border: #e2e8f0;
-  
+
   /* Primary Colors per Subject */
-  --color-lectora: #2563eb; /* Blue */
+  --color-lectora: #2563eb;
+  /* Blue */
   --color-lectora-light: #dbeafe;
-  --color-ciencias: #16a34a; /* Green */
+  --color-ciencias: #16a34a;
+  /* Green */
   --color-ciencias-light: #dcfce7;
-  --color-m1: #f97316; /* Orange */
+  --color-m1: #f97316;
+  /* Orange */
   --color-m1-light: #ffedd5;
-  --color-m2: #9333ea; /* Purple */
+  --color-m2: #9333ea;
+  /* Purple */
   --color-m2-light: #f3e8ff;
 
   /* UI Accents */
@@ -111,5 +115,23 @@ a {
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
   padding: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
 }

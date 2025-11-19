@@ -10,3 +10,11 @@
     background-color: var(--background);
     min-height: 100vh;
 }
+
+/* Tablet and Mobile */
+@media (max-width: 768px) {
+    .main {
+        margin-left: 0;
+        padding: 4.5rem 1rem 1rem;
+    }
+}

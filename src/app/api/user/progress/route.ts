@@ -1,10 +1,19 @@
 import { NextResponse } from 'next/server';
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/lib/auth";
 import { JsonDb } from '@/lib/db';
 
 export async function GET() {
     try {
-        const user = await JsonDb.getUser();
-        const history = await JsonDb.getEssayHistory();
+        const session = await getServerSession(authOptions);
+        const userId = (session?.user as any)?.id;
+
+        if (!userId) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
+        const user = await JsonDb.getUser(userId);
+        const history = await JsonDb.getEssayHistory(userId);
 
         // Sort by date (most recent first)
         const sortedHistory = history.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());

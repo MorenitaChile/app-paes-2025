@@ -16,6 +16,17 @@
   color: var(--foreground);
 }
 
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .grid,
+  .actions {
+    gap: 1rem;
+  }
+}
+
 .subtitle {
   color: var(--muted);
 }

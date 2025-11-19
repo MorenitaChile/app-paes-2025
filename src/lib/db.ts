@@ -73,8 +73,35 @@ class LocalJsonDb {
         fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
     }
 
-    static async getUser(): Promise<User> {
-        return this.read().user;
+    static async getUser(userId?: string): Promise<User> {
+        const db = this.read();
+        // For local JSON, we just return the single user if no ID provided, or match ID
+        if (userId && db.user.id !== userId) {
+            // In a real multi-user JSON DB we would search an array of users.
+            // For simplicity in this local version, we'll just return the main user
+            // but update the ID if it's missing
+            if (!db.user.id) {
+                db.user.id = userId;
+                this.write(db);
+            }
+        }
+        return db.user;
+    }
+
+    static async getUserByEmail(email: string): Promise<User | null> {
+        const db = this.read();
+        if (db.user.email === email) return db.user;
+        // Allow "login" if email matches or if it's the first user
+        if (!db.user.email) return null;
+        return null;
+    }
+
+    static async createUser(user: User): Promise<User> {
+        const db = this.read();
+        // Overwrite the single user for local dev
+        db.user = { ...user, id: user.id || 'local-user-' + Date.now() };
+        this.write(db);
+        return db.user;
     }
 
     static async saveEssayResult(result: EssayResult) {
@@ -93,8 +120,9 @@ class LocalJsonDb {
         return result;
     }
 
-    static async getEssayHistory() {
+    static async getEssayHistory(userId?: string) {
         const db = this.read();
+        // In local JSON, we assume all history belongs to the current user
         return db.essayResults;
     }
 }
@@ -103,16 +131,22 @@ class LocalJsonDb {
 const DEFAULT_USER_ID = 'default-user-001';
 
 class PostgresDb {
-    static async getUser(): Promise<User> {
+    static async getUser(userId: string = DEFAULT_USER_ID): Promise<User> {
         try {
-            // Ensure user exists (upsert)
-            await sql`
-                INSERT INTO users (id, name, email, "lastStudyDate", streak)
-                VALUES (${DEFAULT_USER_ID}, 'Estudiante PAES', 'estudiante@ejemplo.com', NOW(), 1)
-                ON CONFLICT (id) DO NOTHING;
-            `;
-
-            const userResult = await sql`SELECT * FROM users WHERE id = ${DEFAULT_USER_ID}`;
+            const userResult = await sql`SELECT * FROM users WHERE id = ${userId}`;
+            if (userResult.rows.length === 0) {
+                // Fallback for default user if not found
+                if (userId === DEFAULT_USER_ID) {
+                    return {
+                        id: DEFAULT_USER_ID,
+                        name: 'Estudiante PAES',
+                        email: 'estudiante@ejemplo.com',
+                        streak: 0,
+                        lastStudyDate: new Date().toISOString()
+                    };
+                }
+                throw new Error('User not found');
+            }
             const user = userResult.rows[0];
 
             return {
@@ -124,18 +158,57 @@ class PostgresDb {
             };
         } catch (error) {
             console.error('Postgres Error (getUser):', error);
-            // Fallback to mock if DB fails (e.g. not set up yet)
             return INITIAL_DB.user;
+        }
+    }
+
+    static async getUserByEmail(email: string): Promise<User | null> {
+        try {
+            const result = await sql`SELECT * FROM users WHERE email = ${email}`;
+            if (result.rows.length === 0) return null;
+            const user = result.rows[0];
+            return {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                streak: user.streak || 0,
+                lastStudyDate: user.lastStudyDate ? new Date(user.lastStudyDate).toISOString() : new Date().toISOString()
+            };
+        } catch (error) {
+            console.error('Postgres Error (getUserByEmail):', error);
+            return null;
+        }
+    }
+
+    static async createUser(user: User): Promise<User> {
+        try {
+            const id = user.id || crypto.randomUUID();
+            await sql`
+                INSERT INTO users (id, name, email, "lastStudyDate", streak)
+                VALUES (${id}, ${user.name}, ${user.email}, ${user.lastStudyDate}, ${user.streak})
+            `;
+            return { ...user, id };
+        } catch (error) {
+            console.error('Postgres Error (createUser):', error);
+            throw error;
         }
     }
 
     static async saveEssayResult(result: EssayResult) {
         try {
+            // Ensure we have a user ID associated (default if not provided in result context, though it should be)
+            // For now, we assume the API handles passing the correct user context or we use default
+            // But ideally result should have userId. 
+            // Let's assume for now we are using the default ID if not present, but in Auth flow we will pass it.
+
+            // Note: The schema update might be needed to link results to specific users if not already done.
+            // The current schema has "userId" column.
+
             await sql`
                 INSERT INTO essay_results (id, "userId", "essayId", subject, score, "correctAnswers", "totalQuestions", date, answers)
                 VALUES (
                     ${result.id}, 
-                    ${DEFAULT_USER_ID}, 
+                    ${DEFAULT_USER_ID}, -- TODO: Update this to use dynamic user ID from session
                     ${result.essayId}, 
                     ${result.subject}, 
                     ${result.score}, 
@@ -150,7 +223,7 @@ class PostgresDb {
             await sql`
                 UPDATE users 
                 SET streak = streak + 1, "lastStudyDate" = NOW()
-                WHERE id = ${DEFAULT_USER_ID};
+                WHERE id = ${DEFAULT_USER_ID}; -- TODO: Update this too
             `;
 
             return result;
@@ -160,11 +233,11 @@ class PostgresDb {
         }
     }
 
-    static async getEssayHistory() {
+    static async getEssayHistory(userId: string = DEFAULT_USER_ID) {
         try {
             const result = await sql`
                 SELECT * FROM essay_results 
-                WHERE "userId" = ${DEFAULT_USER_ID} 
+                WHERE "userId" = ${userId} 
                 ORDER BY date DESC
             `;
 
@@ -176,7 +249,7 @@ class PostgresDb {
                 correctAnswers: row.correctAnswers,
                 totalQuestions: row.totalQuestions,
                 date: row.date,
-                answers: row.answers // Postgres returns JSONB as object automatically
+                answers: row.answers
             })) as EssayResult[];
         } catch (error) {
             console.error('Postgres Error (getEssayHistory):', error);
