@@ -1,0 +1,84 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.breadcrumb {
+    font-size: 0.875rem;
+    color: var(--muted);
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--foreground);
+}
+
+.axesGrid {
+    display: grid;
+    gap: 2rem;
+}
+
+.axisSection {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 2rem;
+}
+
+.axisTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--foreground);
+}
+
+.topicsList {
+    display: grid;
+    gap: 1rem;
+}
+
+.topicCard {
+    background: var(--muted-light);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.topicCard:hover {
+    border-color: var(--primary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.topicTitle {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.subtopicsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.subtopicTag {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+}

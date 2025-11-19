@@ -1,0 +1,163 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.timer {
+    font-family: monospace;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.progress {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.875rem;
+}
+
+.questionCard {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.questionText {
+    font-size: 1.125rem;
+    line-height: 1.6;
+}
+
+.hints {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--muted-light);
+    border-radius: var(--radius);
+}
+
+.hints summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.hints ul {
+    margin-top: 0.5rem;
+    margin-left: 1.5rem;
+}
+
+.inputArea {
+    width: 100%;
+    min-height: 200px;
+    padding: 1rem;
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+    background: var(--background);
+    color: var(--foreground);
+}
+
+.inputArea:focus {
+    outline: 2px solid var(--primary);
+    border-color: transparent;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.actions button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Results Styles */
+.resultsCard {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.scoreDisplay {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary), var(--color-m2));
+    border-radius: var(--radius);
+    color: white;
+}
+
+.bigScore {
+    font-size: 4rem;
+    font-weight: 700;
+    margin: 1rem 0;
+}
+
+.questionResult {
+    padding: 1.5rem;
+    background: var(--muted-light);
+    border-radius: var(--radius);
+    border-left: 4px solid var(--primary);
+}
+
+.questionScore {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0.5rem 0;
+}
+
+.feedback {
+    margin: 1rem 0;
+    font-style: italic;
+}
+
+.strengths {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--color-ciencias-light);
+    border-radius: 4px;
+}
+
+.strengths ul {
+    margin-left: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.improvements {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--color-m1-light);
+    border-radius: 4px;
+}
+
+.improvements ul {
+    margin-left: 1.5rem;
+    margin-top: 0.5rem;
+}

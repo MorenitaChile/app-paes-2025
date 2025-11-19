@@ -1,0 +1,115 @@
+:root {
+  /* Base Colors */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  
+  /* Primary Colors per Subject */
+  --color-lectora: #2563eb; /* Blue */
+  --color-lectora-light: #dbeafe;
+  --color-ciencias: #16a34a; /* Green */
+  --color-ciencias-light: #dcfce7;
+  --color-m1: #f97316; /* Orange */
+  --color-m1-light: #ffedd5;
+  --color-m2: #9333ea; /* Purple */
+  --color-m2-light: #f3e8ff;
+
+  /* UI Accents */
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --muted: #64748b;
+  --muted-light: #f1f5f9;
+  --success: #22c55e;
+  --error: #ef4444;
+  --warning: #f59e0b;
+
+  /* Spacing & Radius */
+  --radius: 0.5rem;
+  --header-height: 64px;
+  --sidebar-width: 260px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f172a;
+    --foreground: #f8fafc;
+    --card-bg: #1e293b;
+    --card-border: #334155;
+
+    --color-lectora: #3b82f6;
+    --color-lectora-light: #1e3a8a;
+    --color-ciencias: #22c55e;
+    --color-ciencias-light: #14532d;
+    --color-m1: #fb923c;
+    --color-m1-light: #7c2d12;
+    --color-m2: #a855f7;
+    --color-m2-light: #581c87;
+
+    --muted: #94a3b8;
+    --muted-light: #1e293b;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Utility Classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  outline: none;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
