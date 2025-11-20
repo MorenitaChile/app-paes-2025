@@ -196,8 +196,8 @@ class PostgresDb {
         try {
             const id = user.id || crypto.randomUUID();
             await sql`
-                INSERT INTO users (id, name, email, "lastStudyDate", streak)
-                VALUES (${id}, ${user.name}, ${user.email}, ${user.lastStudyDate}, ${user.streak})
+                INSERT INTO users (id, name, "lastName", email, password, "lastStudyDate", streak)
+                VALUES (${id}, ${user.name}, ${user.lastName}, ${user.email}, ${user.password}, ${user.lastStudyDate}, ${user.streak})
             `;
             return { ...user, id };
         } catch (error) {
