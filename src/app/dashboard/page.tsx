@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
-import { JsonDb } from "@/lib/db";
+import { EssayResult, JsonDb, User } from "@/lib/db";
 import ProgressCard from "@/components/Dashboard/ProgressCard";
 import styles from "./page.module.css";
 
@@ -8,8 +8,8 @@ export default async function Home() {
   const session = await getServerSession(authOptions);
   const userId = (session?.user as any)?.id;
 
-  let user = null;
-  let essayHistory = [];
+  let user: User | null = null;
+  let essayHistory: EssayResult[] = [];
 
   if (userId) {
     user = await JsonDb.getUser(userId);

@@ -80,17 +80,10 @@ class LocalJsonDb {
         fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
     }
 
-    static async getUser(userId?: string): Promise<User> {
+    static async getUser(userId?: string): Promise<User | null> {
         const db = this.read();
-        // For local JSON, we just return the single user if no ID provided, or match ID
         if (userId && db.user.id !== userId) {
-            // In a real multi-user JSON DB we would search an array of users.
-            // For simplicity in this local version, we'll just return the main user
-            // but update the ID if it's missing
-            if (!db.user.id) {
-                db.user.id = userId;
-                this.write(db);
-            }
+            return null;
         }
         return db.user;
     }
@@ -98,14 +91,12 @@ class LocalJsonDb {
     static async getUserByEmail(email: string): Promise<User | null> {
         const db = this.read();
         if (db.user.email === email) return db.user;
-        // Allow "login" if email matches or if it's the first user
         if (!db.user.email) return null;
         return null;
     }
 
     static async createUser(user: User): Promise<User> {
         const db = this.read();
-        // Overwrite the single user for local dev
         db.user = { ...user, id: user.id || 'local-user-' + Date.now() };
         this.write(db);
         return db.user;
@@ -115,7 +106,6 @@ class LocalJsonDb {
         const db = this.read();
         db.essayResults.push(result);
 
-        // Update streak logic
         const today = new Date().toISOString().split('T')[0];
         const lastDate = db.user.lastStudyDate.split('T')[0];
         if (today !== lastDate) {
@@ -127,7 +117,7 @@ class LocalJsonDb {
         return result;
     }
 
-    static async getEssayHistory(userId?: string) {
+    static async getEssayHistory(userId: string) {
         const db = this.read();
         if (!userId) return [];
         return db.essayResults.filter(result => result.userId === userId);
@@ -135,26 +125,13 @@ class LocalJsonDb {
 }
 
 // --- Vercel Postgres Implementation ---
-const DEFAULT_USER_ID = 'default-user-001';
-
 class PostgresDb {
-    static async getUser(userId: string = DEFAULT_USER_ID): Promise<User> {
+    static async getUser(userId: string): Promise<User | null> {
+        if (!userId) return null;
         try {
             const userResult = await sql`SELECT * FROM users WHERE id = ${userId}`;
             if (userResult.rows.length === 0) {
-                // Fallback for default user if not found
-                if (userId === DEFAULT_USER_ID) {
-                    return {
-                        id: DEFAULT_USER_ID,
-                        name: 'Estudiante',
-                        lastName: 'PAES',
-                        email: 'estudiante@ejemplo.com',
-                        password: '',
-                        streak: 0,
-                        lastStudyDate: new Date().toISOString()
-                    };
-                }
-                throw new Error('User not found');
+                return null;
             }
             const user = userResult.rows[0];
 
@@ -169,7 +146,7 @@ class PostgresDb {
             };
         } catch (error) {
             console.error('Postgres Error (getUser):', error);
-            return INITIAL_DB.user;
+            return null;
         }
     }
 
@@ -209,14 +186,6 @@ class PostgresDb {
 
     static async saveEssayResult(result: EssayResult) {
         try {
-            // Ensure we have a user ID associated (default if not provided in result context, though it should be)
-            // For now, we assume the API handles passing the correct user context or we use default
-            // But ideally result should have userId. 
-            // Let's assume for now we are using the default ID if not present, but in Auth flow we will pass it.
-
-            // Note: The schema update might be needed to link results to specific users if not already done.
-            // The current schema has "userId" column.
-
             await sql`
                 INSERT INTO essay_results (id, "userId", "essayId", subject, score, "correctAnswers", "totalQuestions", date, answers)
                 VALUES (
@@ -232,7 +201,6 @@ class PostgresDb {
                 );
             `;
 
-            // Update streak
             await sql`
                 UPDATE users 
                 SET streak = streak + 1, "lastStudyDate" = NOW()
@@ -246,7 +214,8 @@ class PostgresDb {
         }
     }
 
-    static async getEssayHistory(userId: string = DEFAULT_USER_ID) {
+    static async getEssayHistory(userId: string) {
+        if (!userId) return [];
         try {
             const result = await sql`
                 SELECT * FROM essay_results 

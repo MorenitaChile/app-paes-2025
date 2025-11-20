@@ -17,7 +17,7 @@ export async function GET() {
             });
         } else {
             // Test Local JSON
-            const user = await JsonDb.getUser();
+            const user = await JsonDb.getUser('id');
             return NextResponse.json({
                 status: 'success',
                 mode: 'development (Local JSON)',
