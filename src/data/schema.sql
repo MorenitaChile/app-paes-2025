@@ -24,6 +24,6 @@ CREATE TABLE IF NOT EXISTS essay_results (
 );
 
 -- Crear usuario por defecto (opcional, el código lo crea si no existe)
-INSERT INTO users (id, name, email, "lastStudyDate", streak)
-VALUES ('default-user-001', 'Estudiante PAES', 'estudiante@ejemplo.com', NOW(), 0)
+INSERT INTO users (id, name, "lastName", email, password, "lastStudyDate", streak)
+VALUES ('default-user-001', 'Estudiante', 'PAES', 'estudiante@ejemplo.com', 'default-password', NOW(), 0)
 ON CONFLICT (id) DO NOTHING;

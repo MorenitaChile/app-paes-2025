@@ -1,34 +1,57 @@
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/lib/auth";
+import { JsonDb } from "@/lib/db";
 import ProgressCard from "@/components/Dashboard/ProgressCard";
 import styles from "./page.module.css";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+  const userId = (session?.user as any)?.id;
+
+  let user = null;
+  let essayHistory = [];
+
+  if (userId) {
+    user = await JsonDb.getUser(userId);
+    essayHistory = await JsonDb.getEssayHistory(userId);
+  }
+
+  const completedEssays = essayHistory.length;
+  const averageScore = completedEssays > 0
+    ? Math.round(essayHistory.reduce((acc, r) => acc + r.score, 0) / completedEssays)
+    : 0;
+
+  // Placeholder values for data not yet implemented
+  const studiedMaterial = "0%";
+  const studyTime = "0h";
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1 className={styles.title}>Hola, Estudiante</h1>
+        <h1 className={styles.title}>Hola, {user?.name || 'Estudiante'}</h1>
         <p className={styles.subtitle}>Aquí está tu resumen de progreso para la PAES 2025</p>
       </header>
 
       <div className={styles.grid}>
         <ProgressCard
           title="Promedio General"
-          value="650"
-          description="+15 pts esta semana"
+          value={String(averageScore)}
+          description={averageScore > 0 ? "Sigue así!" : "Completa un ensayo"}
         />
         <ProgressCard
           title="Ensayos Completados"
-          value="12"
-          description="3 esta semana"
+          value={String(completedEssays)}
+          description={completedEssays > 0 ? `${completedEssays} ensayos realizados` : "Aún no has completado ensayos"}
         />
         <ProgressCard
           title="Material Estudiado"
-          value="45%"
-          description="Ciencias: 60% | M1: 30%"
+          value={studiedMaterial}
+          description="Aún no implementado"
         />
         <ProgressCard
           title="Tiempo de Estudio"
-          value="24h"
-          description="Últimos 7 días"
+          value={studyTime}
+          description="Aún no implementado"
         />
       </div>
 

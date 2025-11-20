@@ -17,6 +17,7 @@ export type User = {
 
 export type EssayResult = {
     id: string;
+    userId: string;
     essayId: string;
     subject: string;
     score: number; // PAES score
@@ -128,8 +129,8 @@ class LocalJsonDb {
 
     static async getEssayHistory(userId?: string) {
         const db = this.read();
-        // In local JSON, we assume all history belongs to the current user
-        return db.essayResults;
+        if (!userId) return [];
+        return db.essayResults.filter(result => result.userId === userId);
     }
 }
 
@@ -220,7 +221,7 @@ class PostgresDb {
                 INSERT INTO essay_results (id, "userId", "essayId", subject, score, "correctAnswers", "totalQuestions", date, answers)
                 VALUES (
                     ${result.id}, 
-                    ${DEFAULT_USER_ID}, -- TODO: Update this to use dynamic user ID from session
+                    ${result.userId},
                     ${result.essayId}, 
                     ${result.subject}, 
                     ${result.score}, 
@@ -235,7 +236,7 @@ class PostgresDb {
             await sql`
                 UPDATE users 
                 SET streak = streak + 1, "lastStudyDate" = NOW()
-                WHERE id = ${DEFAULT_USER_ID}; -- TODO: Update this too
+                WHERE id = ${result.userId};
             `;
 
             return result;
