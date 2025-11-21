@@ -1,0 +1,27 @@
+{
+  "id": "user-001",
+  "name": "Demo User",
+  "email": "demo@local.com",
+  "password": "$2b$10$.p8deMPQ3W89AVTLBaxQTeKL4hBvdSY2iHJHB58B.soDV3zos9g6e",
+  "user": {
+    "name": "Estudiante",
+    "email": "",
+    "streak": 0,
+    "lastStudyDate": "2025-11-19T01:08:42.275Z"
+  },
+  "essayResults": [
+    {
+      "id": "1763514522304",
+      "essayId": "m1-001",
+      "subject": "m1",
+      "score": 469,
+      "correctAnswers": 0,
+      "totalQuestions": 1,
+      "date": "2025-11-19T01:08:42.304Z",
+      "answers": {
+        "0": "Respuesta de prueba"
+      }
+    }
+  ],
+  "topicProgress": []
+}
