@@ -8,10 +8,13 @@ import styles from "./page.module.css";
 
 export default function SubjectEssaysPage() {
     const params = useParams();
-    const router = useRouter();
     const subject = params.subject as string;
 
     const essays = ESSAY_BANK[subject] || [];
+
+    // Separar ensayos por tipo
+    const fullSimulations = essays.filter(e => e.type === 'full_simulation');
+    const practiceEssays = essays.filter(e => e.type !== 'full_simulation');
 
     if (essays.length === 0) {
         return (
@@ -34,6 +37,31 @@ export default function SubjectEssaysPage() {
         m2: "Matemática M2"
     };
 
+    const EssayCard = ({ essay }: { essay: any }) => (
+        <div className={styles.essayCard}>
+            <div className={styles.essayInfo}>
+                <div className={styles.cardHeader}>
+                    <h3 className={styles.essayTitle}>{essay.title}</h3>
+                    {essay.type === 'full_simulation' && (
+                        <span className={styles.badgeSimulation}>Simulacro</span>
+                    )}
+                </div>
+                <p className={styles.essayMeta}>
+                    {essay.questions.length} preguntas • {essay.timeLimit} minutos
+                </p>
+                {essay.description && (
+                    <p className={styles.essayDescription}>{essay.description}</p>
+                )}
+            </div>
+            <Link
+                href={`/ensayos/${subject}/${essay.id}`}
+                className="btn btn-primary"
+            >
+                Comenzar →
+            </Link>
+        </div>
+    );
+
     return (
         <div className={styles.container}>
             <header className={styles.header}>
@@ -41,27 +69,31 @@ export default function SubjectEssaysPage() {
                 <p>Selecciona un ensayo para comenzar</p>
             </header>
 
-            <div className={styles.essaysList}>
-                {essays.map((essay, index) => (
-                    <div key={essay.id} className={styles.essayCard}>
-                        <div className={styles.essayInfo}>
-                            <h3 className={styles.essayTitle}>{essay.title}</h3>
-                            <p className={styles.essayMeta}>
-                                {essay.questions.length} preguntas • {essay.timeLimit} minutos
-                            </p>
-                            {essay.description && (
-                                <p className={styles.essayDescription}>{essay.description}</p>
-                            )}
-                        </div>
-                        <Link
-                            href={`/ensayos/${subject}/${essay.id}`}
-                            className="btn btn-primary"
-                        >
-                            Comenzar →
-                        </Link>
+            {/* Sección de Simulacros Completos */}
+            {fullSimulations.length > 0 && (
+                <section className={styles.section}>
+                    <h2 className={styles.sectionTitle}>🎯 Simulacros Completos</h2>
+                    <p className={styles.sectionDesc}>Condiciones reales de la PAES (55-80 preguntas, 2h+)</p>
+                    <div className={styles.essaysList}>
+                        {fullSimulations.map(essay => (
+                            <EssayCard key={essay.id} essay={essay} />
+                        ))}
                     </div>
-                ))}
-            </div>
+                </section>
+            )}
+
+            {/* Sección de Práctica Progresiva */}
+            {practiceEssays.length > 0 && (
+                <section className={styles.section}>
+                    <h2 className={styles.sectionTitle}>📚 Práctica Progresiva</h2>
+                    <p className={styles.sectionDesc}>Ejercicios enfocados por tema (5-15 preguntas)</p>
+                    <div className={styles.essaysList}>
+                        {practiceEssays.map(essay => (
+                            <EssayCard key={essay.id} essay={essay} />
+                        ))}
+                    </div>
+                </section>
+            )}
 
             <div className={styles.actions}>
                 <Link href="/ensayos" className="btn">

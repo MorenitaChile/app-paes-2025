@@ -30,6 +30,7 @@ export type Essay = {
     subject: string;
     title: string;
     description: string;
+    type: 'practice' | 'full_simulation'; // Type of essay
     timeLimit: number; // minutes
     questions: Question[];
 };
@@ -57,7 +58,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'lectora',
             title: 'Análisis de Textos Argumentativos',
             description: 'Ensayo enfocado en la comprensión y análisis de argumentación',
-            timeLimit: 45,
+            type: 'practice',
+            timeLimit: 5,
             questions: [
                 {
                     id: 'lec-001-q1',
@@ -83,7 +85,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'lectora',
             title: 'Interpretación de Infografías',
             description: 'Análisis de textos discontinuos y gráficos',
-            timeLimit: 40,
+            type: 'practice',
+            timeLimit: 5,
             questions: [
                 {
                     id: 'lec-002-q1',
@@ -109,7 +112,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'lectora',
             title: 'Vocabulario Contextual',
             description: 'Ejercicios de léxico en contexto',
-            timeLimit: 30,
+            type: 'practice',
+            timeLimit: 5,
             questions: [
                 {
                     id: 'lec-003-q1',
@@ -135,7 +139,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'lectora',
             title: 'Textos Literarios: Narrativa',
             description: 'Análisis de elementos narrativos y conflicto',
-            timeLimit: 40,
+            type: 'practice',
+            timeLimit: 5,
             questions: [
                 {
                     id: 'lec-004-q1',
@@ -161,7 +166,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'lectora',
             title: 'Medios Masivos: Noticias',
             description: 'Evaluación de veracidad y propósito en noticias',
-            timeLimit: 35,
+            type: 'practice',
+            timeLimit: 5,
             questions: [
                 {
                     id: 'lec-005-q1',
@@ -189,7 +195,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'ciencias',
             title: 'Mecánica y Fuerzas',
             description: 'Problemas de aplicación de leyes de Newton',
-            timeLimit: 60,
+            type: 'practice',
+            timeLimit: 5,
             questions: [
                 {
                     id: 'cie-001-q1',
@@ -215,7 +222,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'ciencias',
             title: 'Biología Celular',
             description: 'Estructura y función de organelos',
-            timeLimit: 45,
+            type: 'practice',
+            timeLimit: 5,
             questions: [
                 {
                     id: 'cie-002-q1',
@@ -241,7 +249,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'ciencias',
             title: 'Química: Estequiometría',
             description: 'Cálculos de moles y masa',
-            timeLimit: 50,
+            type: 'practice',
+            timeLimit: 5,
             questions: [
                 {
                     id: 'cie-003-q1',
@@ -267,7 +276,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'ciencias',
             title: 'Física: Ondas y Sonido',
             description: 'Propiedades del sonido y efecto Doppler',
-            timeLimit: 45,
+            type: 'practice',
+            timeLimit: 5,
             questions: [
                 {
                     id: 'cie-004-q1',
@@ -293,7 +303,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'ciencias',
             title: 'Método Científico',
             description: 'Diseño experimental y variables',
-            timeLimit: 40,
+            type: 'practice',
+            timeLimit: 5,
             questions: [
                 {
                     id: 'cie-005-q1',
@@ -323,7 +334,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'm1',
             title: 'Geometría: Volúmenes',
             description: 'Cálculo de áreas y volúmenes de cubos y paralelepípedos',
-            timeLimit: 50,
+            type: 'practice',
+            timeLimit: 5,
             questions: [
                 {
                     id: 'm1-001-q1',
@@ -349,7 +361,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'm1',
             title: 'Álgebra: Ecuaciones',
             description: 'Resolución de problemas con ecuaciones de primer grado',
-            timeLimit: 40,
+            type: 'practice',
+            timeLimit: 5,
             questions: [
                 {
                     id: 'm1-002-q1',
@@ -375,7 +388,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'm1',
             title: 'Probabilidad Básica',
             description: 'Regla de Laplace y eventos simples',
-            timeLimit: 35,
+            type: 'practice',
+            timeLimit: 5,
             questions: [
                 {
                     id: 'm1-003-q1',
@@ -401,7 +415,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'm1',
             title: 'Números Enteros y Operatoria',
             description: 'Resolución de problemas con enteros',
-            timeLimit: 30,
+            type: 'practice',
+            timeLimit: 5,
             questions: [
                 {
                     id: 'm1-004-q1',
@@ -427,7 +442,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'm1',
             title: 'Estadística Descriptiva',
             description: 'Media, moda y mediana',
-            timeLimit: 40,
+            type: 'practice',
+            timeLimit: 5,
             questions: [
                 {
                     id: 'm1-005-q1',
@@ -453,7 +469,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'm1',
             title: 'Ensayo M1: Geometría y Datos',
             description: 'Evaluación integral de ejes de Geometría y Probabilidad',
-            timeLimit: 60,
+            type: 'practice',
+            timeLimit: 7,
             questions: [
                 {
                     id: 'm1-006-q1',
@@ -486,7 +503,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'ciencias',
             title: 'Método Científico',
             description: 'Diseño experimental y variables',
-            timeLimit: 40,
+            type: 'practice',
+            timeLimit: 5,
             questions: [
                 {
                     id: 'cie-005-q1',
@@ -516,7 +534,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'm2',
             title: 'Funciones Trigonométricas',
             description: 'Análisis de funciones seno y coseno',
-            timeLimit: 55,
+            type: 'practice',
+            timeLimit: 6,
             questions: [
                 {
                     id: 'm2-001-q1',
@@ -542,7 +561,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'm2',
             title: 'Logaritmos y Ecuaciones',
             description: 'Propiedades de logaritmos y resolución de ecuaciones logarítmicas',
-            timeLimit: 50,
+            type: 'practice',
+            timeLimit: 6,
             questions: [
                 {
                     id: 'm2-002-q1',
@@ -568,7 +588,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'm2',
             title: 'Geometría 3D: Vectores',
             description: 'Operaciones con vectores en el espacio',
-            timeLimit: 45,
+            type: 'practice',
+            timeLimit: 6,
             questions: [
                 {
                     id: 'm2-003-q1',
@@ -594,7 +615,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'm2',
             title: 'Geometría Analítica: Rectas',
             description: 'Ecuación de la recta y pendientes',
-            timeLimit: 45,
+            type: 'practice',
+            timeLimit: 6,
             questions: [
                 {
                     id: 'm2-004-q1',
@@ -620,7 +642,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'm2',
             title: 'Probabilidad Condicional',
             description: 'Eventos dependientes y probabilidad total',
-            timeLimit: 50,
+            type: 'practice',
+            timeLimit: 6,
             questions: [
                 {
                     id: 'm2-005-q1',
@@ -646,7 +669,8 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
             subject: 'm2',
             title: 'Ensayo M2: Álgebra Avanzada',
             description: 'Ecuaciones logarítmicas y sistemas complejos',
-            timeLimit: 60,
+            type: 'practice',
+            timeLimit: 9,
             questions: [
                 {
                     id: 'm2-006-q1',
@@ -676,3 +700,32 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
         }
     ]
 };
+
+
+// Import simulations
+import { simulacionCienciasBiologia, simulacionM2 } from './simulations';
+
+// Convert Simulation to Essay format for compatibility
+const cienciasSimulationAsEssay: Essay = {
+    id: simulacionCienciasBiologia.id,
+    subject: simulacionCienciasBiologia.subject,
+    title: simulacionCienciasBiologia.title,
+    description: simulacionCienciasBiologia.description,
+    type: 'full_simulation',
+    timeLimit: simulacionCienciasBiologia.timeLimit,
+    questions: simulacionCienciasBiologia.questions
+};
+
+const m2SimulationAsEssay: Essay = {
+    id: simulacionM2.id,
+    subject: simulacionM2.subject,
+    title: simulacionM2.title,
+    description: simulacionM2.description,
+    type: 'full_simulation',
+    timeLimit: simulacionM2.timeLimit,
+    questions: simulacionM2.questions
+};
+
+// Add simulations to ESSAY_BANK
+ESSAY_BANK.ciencias.push(cienciasSimulationAsEssay);
+ESSAY_BANK.m2.push(m2SimulationAsEssay);

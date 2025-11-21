@@ -164,6 +164,11 @@ export default function EssayRunner() {
         <div className={styles.container}>
             <header className={styles.header}>
                 <h1 className={styles.title}>{currentEssay.title}</h1>
+                {currentEssay.type === 'full_simulation' && (
+                    <div className={styles.simulationBanner}>
+                        🎯 Modo Simulacro - Condiciones reales PAES
+                    </div>
+                )}
                 <div className={styles.timer} style={{ color: timeRemaining < 300 ? 'var(--error)' : undefined }}>
                     {formatTime(timeRemaining)}
                 </div>

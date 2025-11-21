@@ -186,20 +186,33 @@
     border-left: 4px solid var(--primary);
 }
 
-.correct {
-    border-left-color: var(--success);
-    background: rgba(var(--success-rgb), 0.1);
+.sectionTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--foreground);
 }
 
-.incorrect {
-    border-left-color: var(--error);
-    background: rgba(var(--error-rgb), 0.1);
-}
-
-.solution {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+.sectionDesc {
+    color: var(--muted);
+    margin-bottom: 1rem;
     font-size: 0.95rem;
-    color: var(--muted-foreground);
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.badgeSimulation {
+    background: linear-gradient(135deg, var(--primary), var(--color-m2));
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
 }
