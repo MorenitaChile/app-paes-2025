@@ -3,7 +3,7 @@
  * Nivel Básico: Definición y propiedades básicas de logaritmos
  */
 
-import { Question } from '../questions';
+import { Question } from '../../questions';
 
 export const logaritmosBasico: Question[] = [
     {

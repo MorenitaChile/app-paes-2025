@@ -3,7 +3,7 @@
  * Nivel Básico: Extracción de información explícita
  */
 
-import { Question } from '../questions';
+import { Question } from '../../questions';
 
 export const localizarBasico: Question[] = [
     {

@@ -3,7 +3,7 @@
  * Nivel Intermedio: Ecuaciones con paréntesis y fracciones
  */
 
-import { Question } from '../questions';
+import { Question } from '../../questions';
 
 export const ecuacionesIntermedio: Question[] = [
     {

@@ -3,7 +3,7 @@
  * Nivel Básico: Estructura y función de organelos
  */
 
-import { Question } from '../questions';
+import { Question } from '../../questions';
 
 export const celulasBasico: Question[] = [
     {

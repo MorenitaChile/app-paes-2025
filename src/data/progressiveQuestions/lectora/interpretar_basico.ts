@@ -3,7 +3,7 @@
  * Nivel Básico: Inferencias simples basadas en el texto
  */
 
-import { Question } from '../questions';
+import { Question } from '../../questions';
 
 export const interpretarBasico: Question[] = [
     {

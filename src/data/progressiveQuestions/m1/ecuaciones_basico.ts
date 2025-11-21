@@ -3,7 +3,7 @@
  * Nivel Básico: Ecuaciones lineales simples
  */
 
-import { Question } from '../questions';
+import { Question } from '../../questions';
 
 export const ecuacionesBasico: Question[] = [
     {
