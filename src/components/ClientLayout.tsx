@@ -12,7 +12,7 @@ export default function ClientLayout({
     const pathname = usePathname();
 
     // Log para verificar versión en producción
-    console.log("ClientLayout Version: 1.0.1 - Sidebar Fix");
+    console.log("ClientLayout Version: 2.0.0 - NO CACHE FIX");
 
     // Rutas donde NO queremos mostrar el sidebar
     const publicRoutes = ["/", "/login", "/register"];
