@@ -1,0 +1,224 @@
+.container {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.header {
+    margin-bottom: 1.5rem;
+}
+
+.metadata {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.difficulty {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.timer {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.recommended {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.questionText {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.questionText p {
+    margin-bottom: 0.5rem;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+}
+
+.option:hover:not(:disabled) {
+    border-color: #2196F3;
+    background: #f5f5f5;
+}
+
+.option:disabled {
+    cursor: not-allowed;
+}
+
+.option.selected {
+    border-color: #2196F3;
+    background: #E3F2FD;
+}
+
+.option.correct {
+    border-color: #4CAF50;
+    background: #E8F5E9;
+}
+
+.option.incorrect {
+    border-color: #F44336;
+    background: #FFEBEE;
+}
+
+.optionLetter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #2196F3;
+    color: white;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.option.correct .optionLetter {
+    background: #4CAF50;
+}
+
+.option.incorrect .optionLetter {
+    background: #F44336;
+}
+
+.optionText {
+    flex: 1;
+    font-size: 1rem;
+}
+
+.strategySection {
+    margin-bottom: 1.5rem;
+}
+
+.strategyButton {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #FF9800;
+    border-radius: 8px;
+    background: white;
+    color: #FF9800;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.strategyButton:hover {
+    background: #FF9800;
+    color: white;
+}
+
+.strategyHint {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-left: 4px solid #FF9800;
+    background: #FFF3E0;
+    border-radius: 4px;
+}
+
+.submitButton {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    background: #2196F3;
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.submitButton:hover:not(:disabled) {
+    background: #1976D2;
+}
+
+.submitButton:disabled {
+    background: #BDBDBD;
+    cursor: not-allowed;
+}
+
+.solution {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-left: 4px solid #4CAF50;
+    background: #E8F5E9;
+    border-radius: 4px;
+}
+
+.solution h4 {
+    margin: 0 0 0.5rem 0;
+    color: #2E7D32;
+}
+
+.solution p {
+    margin: 0;
+    color: #333;
+}
+
+.errorAnalysis {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    border: 2px solid #FF9800;
+    border-radius: 8px;
+    background: #FFF3E0;
+}
+
+.errorAnalysis h4 {
+    margin: 0 0 1rem 0;
+    color: #E65100;
+}
+
+.errorItem {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 6px;
+}
+
+.errorItem:last-child {
+    margin-bottom: 0;
+}
+
+.errorTitle {
+    margin-bottom: 0.5rem;
+    color: #D84315;
+}
+
+.errorExplanation {
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.errorPrevention {
+    color: #1976D2;
+}

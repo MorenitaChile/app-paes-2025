@@ -5,6 +5,7 @@ export type Question = {
     axis: string;
     topic: string;
     difficulty: 'easy' | 'medium' | 'hard';
+    difficultyLevel?: 'basico' | 'intermedio' | 'avanzado'; // Progressive difficulty
     text: string;
     options?: string[];
     correctAnswer?: number | string;
@@ -15,6 +16,13 @@ export type Question = {
     }[];
     hints?: string[];
     solution?: string;
+    errorAnalysis?: { // Common mistakes and explanations
+        commonMistake: string;
+        explanation: string;
+        preventionTip: string;
+    }[];
+    strategy?: string; // Resolution strategy for this question
+    timeRecommended?: number; // Recommended time in seconds
 };
 
 export type Essay = {
@@ -24,6 +32,20 @@ export type Essay = {
     description: string;
     timeLimit: number; // minutes
     questions: Question[];
+};
+
+export type Simulation = {
+    id: string;
+    subject: 'lectora' | 'm1' | 'm2' | 'ciencias' | 'historia';
+    title: string;
+    description: string;
+    totalQuestions: number; // Total including pilot questions
+    validQuestions: number; // Questions that count for score
+    pilotQuestions: number; // Questions for research (not scored)
+    timeLimit: number; // minutes
+    optionsCount: 4 | 5; // Number of options per question
+    questions: Question[];
+    format: 'DEMRE'; // Official DEMRE format
 };
 
 // Sample Essays for each subject
