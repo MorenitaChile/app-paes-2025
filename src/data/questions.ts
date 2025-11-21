@@ -702,8 +702,9 @@ export const ESSAY_BANK: Record<string, Essay[]> = {
 };
 
 
+
 // Import simulations
-import { simulacionCienciasBiologia, simulacionM2 } from './simulations';
+import { simulacionCienciasBiologia, simulacionM2, simulacroLectora001, simulacroM1001 } from './simulations';
 
 // Convert Simulation to Essay format for compatibility
 const cienciasSimulationAsEssay: Essay = {
@@ -726,6 +727,28 @@ const m2SimulationAsEssay: Essay = {
     questions: simulacionM2.questions
 };
 
+const lectoraSimulationAsEssay: Essay = {
+    id: simulacroLectora001.id,
+    subject: simulacroLectora001.subject,
+    title: simulacroLectora001.title,
+    description: simulacroLectora001.description,
+    type: 'full_simulation',
+    timeLimit: simulacroLectora001.timeLimit,
+    questions: simulacroLectora001.questions
+};
+
+const m1SimulationAsEssay: Essay = {
+    id: simulacroM1001.id,
+    subject: simulacroM1001.subject,
+    title: simulacroM1001.title,
+    description: simulacroM1001.description,
+    type: 'full_simulation',
+    timeLimit: simulacroM1001.timeLimit,
+    questions: simulacroM1001.questions
+};
+
 // Add simulations to ESSAY_BANK
 ESSAY_BANK.ciencias.push(cienciasSimulationAsEssay);
 ESSAY_BANK.m2.push(m2SimulationAsEssay);
+ESSAY_BANK.lectora.push(lectoraSimulationAsEssay);
+ESSAY_BANK.m1.push(m1SimulationAsEssay);
