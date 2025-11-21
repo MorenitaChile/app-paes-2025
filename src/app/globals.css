@@ -19,14 +19,22 @@
   /* Purple */
   --color-m2-light: #f3e8ff;
 
-  /* UI Accents */
-  --primary: #3b82f6;
+  /* UI Accents - Updated to match Mockup */
+  --primary: #6366f1;
+  /* Indigo-500 */
+  --primary-dark: #4f46e5;
+  /* Indigo-600 */
+  --primary-light: #e0e7ff;
+  /* Indigo-100 */
   --primary-foreground: #ffffff;
+  --accent: #f59e0b;
+  /* Amber-500 */
   --muted: #64748b;
   --muted-light: #f1f5f9;
-  --success: #22c55e;
+  --success: #10b981;
+  /* Emerald-500 */
   --error: #ef4444;
-  --warning: #f59e0b;
+  --warning: #fbbf24;
 
   /* Spacing & Radius */
   --radius: 0.5rem;

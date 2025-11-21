@@ -61,7 +61,7 @@
 .questionNumber {
     font-size: 1.125rem;
     font-weight: 700;
-    color: #2196F3;
+    color: var(--primary);
 }
 
 .markButton {
@@ -75,13 +75,13 @@
 }
 
 .markButton:hover {
-    border-color: #FF9800;
-    background: #FFF8E1;
+    border-color: var(--accent);
+    background: var(--color-m1-light);
 }
 
 .markButton.marked {
-    border-color: #FF9800;
-    background: #FF9800;
+    border-color: var(--accent);
+    background: var(--accent);
     color: white;
 }
 
@@ -114,13 +114,13 @@
 }
 
 .option:hover {
-    border-color: #2196F3;
-    background: #E3F2FD;
+    border-color: var(--primary);
+    background: var(--primary-light);
 }
 
 .option.selected {
-    border-color: #2196F3;
-    background: #2196F3;
+    border-color: var(--primary);
+    background: var(--primary);
     color: white;
 }
 
@@ -156,9 +156,9 @@
 .navButton,
 .finishButton {
     padding: 0.75rem 1.5rem;
-    border: 2px solid #2196F3;
+    border: 2px solid var(--primary);
     background: white;
-    color: #2196F3;
+    color: var(--primary);
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
@@ -167,7 +167,7 @@
 }
 
 .navButton:hover {
-    background: #2196F3;
+    background: var(--primary);
     color: white;
 }
 
@@ -177,14 +177,14 @@
 }
 
 .finishButton {
-    background: #4CAF50;
-    border-color: #4CAF50;
+    background: var(--success);
+    border-color: var(--success);
     color: white;
 }
 
 .finishButton:hover {
-    background: #388E3C;
-    border-color: #388E3C;
+    background: #059669;
+    border-color: #059669;
 }
 
 .navigatorSidebar {
@@ -226,7 +226,7 @@
 }
 
 .modalContent .warning {
-    color: #F57C00;
+    color: var(--accent);
     font-weight: 600;
 }
 
@@ -258,12 +258,12 @@
 }
 
 .confirmButton {
-    background: #4CAF50;
+    background: var(--success);
     color: white;
 }
 
 .confirmButton:hover {
-    background: #388E3C;
+    background: #059669;
 }
 
 /* Responsive */

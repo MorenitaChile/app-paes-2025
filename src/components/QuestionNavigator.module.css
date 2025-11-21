@@ -29,7 +29,7 @@
 .statValue {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #2196F3;
+    color: var(--primary);
 }
 
 .statLabel {
@@ -63,15 +63,15 @@
 }
 
 .questionButton.current {
-    background: #2196F3;
-    border-color: #2196F3;
+    background: var(--primary);
+    border-color: var(--primary);
     color: white;
-    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 .questionButton.answered {
-    background: #4CAF50;
-    border-color: #4CAF50;
+    background: var(--success);
+    border-color: var(--success);
     color: white;
 }
 
@@ -82,8 +82,8 @@
 }
 
 .questionButton.marked {
-    background: #FF9800;
-    border-color: #FF9800;
+    background: var(--accent);
+    border-color: var(--accent);
     color: white;
 }
 
@@ -111,13 +111,13 @@
 }
 
 .legendBox.current {
-    background: #2196F3;
-    border-color: #2196F3;
+    background: var(--primary);
+    border-color: var(--primary);
 }
 
 .legendBox.answered {
-    background: #4CAF50;
-    border-color: #4CAF50;
+    background: var(--success);
+    border-color: var(--success);
 }
 
 .legendBox.unanswered {
@@ -126,8 +126,8 @@
 }
 
 .legendBox.marked {
-    background: #FF9800;
-    border-color: #FF9800;
+    background: var(--accent);
+    border-color: var(--accent);
 }
 
 /* Responsive */
