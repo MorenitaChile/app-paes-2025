@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    images: {
+        unoptimized: true,
+    },
     webpack: (config, { isServer, nextRuntime }) => {
         if (isServer && nextRuntime === "edge") {
             config.resolve.alias = {
