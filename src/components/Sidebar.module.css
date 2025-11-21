@@ -58,7 +58,8 @@
 }
 
 .menuButton {
-    display: none; /* Oculto por defecto en desktop */
+    display: none;
+    /* Oculto por defecto en desktop */
 }
 
 .overlay {
@@ -86,11 +87,28 @@
         border-radius: var(--radius);
         padding: 0.5rem;
         cursor: pointer;
+        font-size: 1.5rem;
     }
 
     .header .menuButton {
         position: static;
+        background: var(--primary);
+        color: white;
         border: none;
+        font-size: 1.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .header .menuButton:hover {
+        background: var(--primary-dark);
+        transform: scale(1.1);
     }
 
     .overlay {
