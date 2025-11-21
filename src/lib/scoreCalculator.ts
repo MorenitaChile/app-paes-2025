@@ -4,7 +4,7 @@
  * Based on official transformation tables from DEMRE
  */
 
-type Subject = 'lectora' | 'm1' | 'm2' | 'ciencias';
+type Subject = 'lectora' | 'm1' | 'm2' | 'ciencias' | 'historia';
 
 // Transformation tables from guia-completa-ia-paes.md
 const TRANSFORMATION_TABLES: Record<Subject, Record<number, number>> = {
@@ -29,8 +29,15 @@ const TRANSFORMATION_TABLES: Record<Subject, Record<number, number>> = {
         0: 100, 5: 265, 10: 347, 15: 413, 20: 478,
         25: 521, 30: 583, 35: 623, 40: 684, 45: 738,
         50: 802, 55: 886, 60: 920, 65: 950, 70: 975, 75: 1000
+    },
+    historia: {
+        // Using Ciencias table as approximation (official Historia table not provided)
+        0: 100, 5: 265, 10: 347, 15: 413, 20: 478,
+        25: 521, 30: 583, 35: 623, 40: 684, 45: 738,
+        50: 802, 55: 886, 60: 920, 65: 950, 70: 975, 75: 1000
     }
 };
+
 
 /**
  * Linear interpolation between two points
