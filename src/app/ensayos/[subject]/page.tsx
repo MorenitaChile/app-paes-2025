@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { ESSAY_BANK } from "@/data/questions";
-import { scoreOpenEndedResponse, scoreProblemSolving, convertToPAESScale } from "@/lib/scoring";
+import { TOPIC_CONTENT } from "@/data/content";
+import { scoreMultipleChoice, calculatePAESScore } from "@/lib/scoring";
 import styles from "./page.module.css";
 
 export default function EssayRunner() {
@@ -12,7 +13,7 @@ export default function EssayRunner() {
     const subject = params.subject as string;
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [answers, setAnswers] = useState<Record<number, string>>({});
+    const [answers, setAnswers] = useState<Record<number, number>>({}); // Store selected option index
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [results, setResults] = useState<any>(null);
     const [timeRemaining, setTimeRemaining] = useState(0);
@@ -42,6 +43,7 @@ export default function EssayRunner() {
     }
 
     const currentQuestion = currentEssay.questions[currentQuestionIndex];
+    const topicContent = TOPIC_CONTENT[currentQuestion.topic];
     const totalQuestions = currentEssay.questions.length;
 
     const formatTime = (seconds: number) => {
@@ -50,8 +52,8 @@ export default function EssayRunner() {
         return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     };
 
-    const handleAnswerChange = (value: string) => {
-        setAnswers({ ...answers, [currentQuestionIndex]: value });
+    const handleAnswerChange = (optionIndex: number) => {
+        setAnswers({ ...answers, [currentQuestionIndex]: optionIndex });
     };
 
     const handleNext = () => {
@@ -68,28 +70,34 @@ export default function EssayRunner() {
 
     const handleSubmit = () => {
         // Score all answers
+        let correctCount = 0;
         const questionResults = currentEssay.questions.map((question, index) => {
-            const userAnswer = answers[index] || '';
+            const userAnswer = answers[index];
+            // Default to -1 if no answer, ensuring 0 score
+            const safeUserAnswer = userAnswer !== undefined ? userAnswer : -1;
+            // Ensure correctAnswer is treated as number. In data it might be number or string (if legacy).
+            // Our converted data has number.
+            const safeCorrectAnswer = typeof question.correctAnswer === 'number' ? question.correctAnswer : -1;
 
-            if (question.type === 'open-ended') {
-                return scoreOpenEndedResponse(question, userAnswer);
-            } else if (question.type === 'problem-solving') {
-                return scoreProblemSolving(question, userAnswer);
-            }
+            const score = scoreMultipleChoice(safeUserAnswer, safeCorrectAnswer);
+            if (score === 1) correctCount++;
 
-            return null;
+            return {
+                questionId: question.id,
+                isCorrect: score === 1,
+                userAnswer: safeUserAnswer,
+                correctAnswer: safeCorrectAnswer,
+                solution: question.solution
+            };
         });
 
-        const totalScore = questionResults.reduce((sum, r) => sum + (r?.score || 0), 0);
-        const totalMax = questionResults.reduce((sum, r) => sum + (r?.maxScore || 0), 0);
-        const paesScore = convertToPAESScale(totalScore, totalMax);
+        const paesScore = calculatePAESScore(subject, correctCount);
 
         const resultData = {
             questionResults,
-            totalScore,
-            totalMax,
-            paesScore,
-            percentage: (totalScore / totalMax) * 100
+            correctCount,
+            totalQuestions,
+            paesScore
         };
 
         setResults(resultData);
@@ -103,7 +111,7 @@ export default function EssayRunner() {
                 essayId: currentEssay.id,
                 subject: currentEssay.subject,
                 score: paesScore,
-                correctAnswers: questionResults.filter(r => r && r.score === r.maxScore).length,
+                correctAnswers: correctCount,
                 totalQuestions: totalQuestions,
                 answers: answers
             })
@@ -121,42 +129,27 @@ export default function EssayRunner() {
                     <div className={styles.scoreDisplay}>
                         <h2>Puntaje PAES</h2>
                         <div className={styles.bigScore}>{results.paesScore}</div>
-                        <p>{results.totalScore} / {results.totalMax} puntos ({Math.round(results.percentage)}%)</p>
+                        <p>{results.correctCount} correctas de {results.totalQuestions} preguntas</p>
                     </div>
 
-                    {results.questionResults.map((result: any, index: number) => (
-                        result && (
-                            <div key={index} className={styles.questionResult}>
+                    <div className={styles.questionsList}>
+                        {results.questionResults.map((result: any, index: number) => (
+                            <div key={index} className={`${styles.questionResult} ${result.isCorrect ? styles.correct : styles.incorrect}`}>
                                 <h3>Pregunta {index + 1}</h3>
-                                <p className={styles.questionScore}>
-                                    {result.score} / {result.maxScore} puntos
+                                <p>
+                                    <strong>Tu respuesta:</strong> {currentEssay.questions[index].options?.[result.userAnswer] || 'Sin responder'}
                                 </p>
-                                <p className={styles.feedback}>{result.overallFeedback}</p>
-
-                                {result.strengths.length > 0 && (
-                                    <div className={styles.strengths}>
-                                        <strong>Fortalezas:</strong>
-                                        <ul>
-                                            {result.strengths.map((s: string, i: number) => (
-                                                <li key={i}>{s}</li>
-                                            ))}
-                                        </ul>
-                                    </div>
+                                {!result.isCorrect && (
+                                    <p>
+                                        <strong>Respuesta correcta:</strong> {currentEssay.questions[index].options?.[result.correctAnswer]}
+                                    </p>
                                 )}
-
-                                {result.improvements.length > 0 && (
-                                    <div className={styles.improvements}>
-                                        <strong>Áreas de mejora:</strong>
-                                        <ul>
-                                            {result.improvements.map((imp: string, i: number) => (
-                                                <li key={i}>{imp}</li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                )}
+                                <p className={styles.solution}>
+                                    <strong>Explicación:</strong> {result.solution}
+                                </p>
                             </div>
-                        )
-                    ))}
+                        ))}
+                    </div>
 
                     <div className={styles.actions}>
                         <button className="btn" onClick={() => router.push('/ensayos')}>
@@ -198,14 +191,46 @@ export default function EssayRunner() {
                             </ul>
                         </details>
                     )}
+
+                    {topicContent && (topicContent.strategies || topicContent.commonErrors) && (
+                        <details className={styles.strategies}>
+                            <summary>🧠 Estrategias y Errores Comunes</summary>
+                            <div className={styles.strategyContent}>
+                                {topicContent.strategies && (
+                                    <div className={styles.strategyBlock}>
+                                        <strong>Estrategias:</strong>
+                                        <ul>
+                                            {topicContent.strategies.map((s, i) => <li key={i}>{s}</li>)}
+                                        </ul>
+                                    </div>
+                                )}
+                                {topicContent.commonErrors && (
+                                    <div className={styles.strategyBlock}>
+                                        <strong>Errores Comunes:</strong>
+                                        <ul>
+                                            {topicContent.commonErrors.map((e, i) => <li key={i}>{e}</li>)}
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
+                        </details>
+                    )}
                 </div>
 
-                <textarea
-                    className={styles.inputArea}
-                    placeholder="Escribe tu desarrollo y respuesta aquí..."
-                    value={answers[currentQuestionIndex] || ''}
-                    onChange={(e) => handleAnswerChange(e.target.value)}
-                />
+                <div className={styles.optionsList}>
+                    {currentQuestion.options?.map((option, index) => (
+                        <label key={index} className={styles.optionLabel}>
+                            <input
+                                type="radio"
+                                name={`question-${currentQuestionIndex}`}
+                                value={index}
+                                checked={answers[currentQuestionIndex] === index}
+                                onChange={() => handleAnswerChange(index)}
+                            />
+                            <span className={styles.optionText}>{option}</span>
+                        </label>
+                    ))}
+                </div>
 
                 <div className={styles.actions}>
                     <button

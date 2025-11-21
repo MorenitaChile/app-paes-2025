@@ -5,6 +5,8 @@ export type ContentBlock =
 export type TopicContent = {
     id: string;
     theory: ContentBlock[];
+    commonErrors?: string[];
+    strategies?: string[];
     examples: {
         title: string;
         content: string;
@@ -42,6 +44,47 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
                 options: ["Se debe deducir", "Aparece literal en el texto", "Es una opinión del autor", "Requiere conocimientos previos"],
                 correct: 1,
                 explanation: "La información explícita es aquella que está escrita directamente en el texto."
+            },
+            {
+                id: 2,
+                text: "Si el texto dice 'María compró manzanas rojas', ¿qué afirmación es explícita?",
+                options: ["María tenía hambre", "Las manzanas eran rojas", "A María le gustan las frutas", "Las manzanas estaban baratas"],
+                correct: 1,
+                explanation: "El texto menciona literalmente que las manzanas eran rojas."
+            }
+        ]
+    },
+    "localizar": {
+        id: "localizar",
+        theory: [
+            "La habilidad de Localizar exige identificar y extraer información textual explícita.",
+            "Se debe rastrear la coincidencia literal o casi literal (sinónimos) entre la pregunta y el texto.",
+            "Tareas lectoras: Extraer información explícita, identificar información dicha con sinónimos."
+        ],
+        commonErrors: [
+            "No diferenciar entre información literal y parafraseada.",
+            "Confundir sinónimos con palabras diferentes.",
+            "Saltarse palabras clave en la pregunta."
+        ],
+        strategies: [
+            "Busca coincidencia literal o sinónimos en el texto.",
+            "Vuelve al texto para confirmar tu hallazgo.",
+            "Subraya las palabras clave de la pregunta antes de buscar."
+        ],
+        examples: [
+            {
+                title: "Uso de Sinónimos",
+                content: "Texto: 'El canino corrió velozmente tras el esférico.'\nPregunta: ¿Qué hizo el perro?",
+                solution: "Corrió tras la pelota. (Canino = Perro, Esférico = Pelota)."
+            }
+        ],
+        quiz: [
+            {
+                id: 1,
+                text: "¿Qué implica la tarea de localizar información?",
+                options: ["Opinar sobre el texto", "Encontrar datos explícitos", "Inferir el final", "Resumir todo el texto"],
+                correct: 1,
+                explanation: "Localizar se centra en hallar información que está presente en el texto."
             }
         ]
     },
@@ -51,6 +94,16 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
             "Interpretar implica construir un sentido global o local a partir de las relaciones entre diferentes partes del texto.",
             "Incluye habilidades como inferir (sacar conclusiones no explícitas), sintetizar (resumir la idea central) y relacionar (conectar dos o más ideas).",
             "Es crucial distinguir entre lo que el texto dice y lo que el lector aporta. La inferencia válida siempre se sustenta en marcas textuales."
+        ],
+        commonErrors: [
+            "Hacer inferencias sin base textual.",
+            "Confundir la opinión del narrador con hechos del texto.",
+            "Perder la coherencia global del texto."
+        ],
+        strategies: [
+            "Relaciona párrafos entre sí para construir sentido.",
+            "Busca pistas textuales para justificar tus inferencias.",
+            "Distingue claramente entre lo explícito y lo implícito."
         ],
         examples: [
             {
@@ -75,6 +128,16 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
             "Evaluar consiste en emitir un juicio crítico sobre la forma o el contenido del texto, basándose en criterios objetivos.",
             "Implica analizar el propósito comunicativo, la actitud del autor, la veracidad de la información o la pertinencia de los recursos utilizados.",
             "En la PAES, evaluar no es dar una opinión personal ('me gustó'), sino juzgar la eficacia o calidad del texto según su contexto."
+        ],
+        commonErrors: [
+            "No reconocer la intención comunicativa del autor.",
+            "Juzgar un texto sin criterios consistentes (gusto personal).",
+            "Confundir calidad de forma con calidad de contenido."
+        ],
+        strategies: [
+            "Identifica la tesis central y el propósito del autor.",
+            "Analiza la argumentación y detecta posibles falacias.",
+            "Evalúa si el texto cumple su objetivo comunicativo."
         ],
         examples: [
             {
@@ -102,6 +165,16 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
             "Regla de los signos: (+)·(+) = (+), (-)·(-) = (+), (+)·(-) = (-). Esta regla aplica para multiplicación y división.",
             "Prioridad de operaciones (PAPOMUDAS): Paréntesis, Potencias, Multiplicación/División (de izq a der), Adición/Sustracción (de izq a der)."
         ],
+        commonErrors: [
+            "Errores en signos, especialmente al restar números negativos.",
+            "No aplicar correctamente el orden de operaciones (PEMDAS/PAPOMUDAS).",
+            "Confusión al multiplicar números con distinto signo."
+        ],
+        strategies: [
+            "Verifica cada operación paso a paso.",
+            "Usa paréntesis auxiliares si tienes dudas con los signos.",
+            "Recuerda: menos por menos es más."
+        ],
         examples: [
             {
                 title: "Operación Combinada",
@@ -116,6 +189,13 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
                 options: ["-8", "-2", "2", "8"],
                 correct: 1,
                 explanation: "-5 - (-3) es equivalente a -5 + 3, lo que resulta en -2."
+            },
+            {
+                id: 2,
+                text: "Si multiplicas dos números negativos, el resultado es:",
+                options: ["Negativo", "Positivo", "Cero", "Depende de los números"],
+                correct: 1,
+                explanation: "Regla de los signos: (-) · (-) = (+)."
             }
         ]
     },
@@ -173,6 +253,16 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
             "Una ecuación de primer grado es una igualdad con una incógnita de exponente 1. El objetivo es despejar la x.",
             "Sistemas de ecuaciones 2x2: Conjunto de dos ecuaciones con dos incógnitas. Métodos de resolución: Sustitución, Igualación, Reducción.",
             "Inecuaciones: Desigualdades (>, <, ≥, ≤). Al multiplicar o dividir por un número negativo, el sentido de la desigualdad se invierte."
+        ],
+        commonErrors: [
+            "Olvidar invertir la desigualdad al multiplicar/dividir por negativo.",
+            "Error de signos al pasar términos de un lado a otro.",
+            "No comprobar la solución en el contexto del problema."
+        ],
+        strategies: [
+            "Despeja la incógnita sistemáticamente.",
+            "Si multiplicas por negativo, invierte inmediatamente el signo > o <.",
+            "Sustituye el valor obtenido en la ecuación original para verificar."
         ],
         examples: [
             {
@@ -340,6 +430,31 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
             }
         ]
     },
+    "medidas_posicion": {
+        id: "medidas_posicion",
+        theory: [
+            "Las medidas de posición dividen un conjunto de datos ordenados en partes iguales.",
+            "Cuartiles (Q): Dividen en 4 partes (25%, 50%, 75%). Q2 coincide con la Mediana.",
+            "Percentiles (P): Dividen en 100 partes. P50 es la Mediana.",
+            "Diagrama de Cajón (Boxplot): Representa Q1, Q2, Q3 y los valores extremos."
+        ],
+        examples: [
+            {
+                title: "Cálculo de Cuartil",
+                content: "Datos: 2, 4, 6, 8, 10, 12, 14, 16. Calcula Q1 (25%).",
+                solution: "Posición = n*k/4 = 8*1/4 = 2. El dato en la posición 2 es 4. Promedio con el siguiente si es par, o regla específica. Aquí Q1 está entre 4 y 6 (aprox 5)."
+            }
+        ],
+        quiz: [
+            {
+                id: 1,
+                text: "¿A qué porcentaje de los datos corresponde el tercer cuartil (Q3)?",
+                options: ["25%", "50%", "75%", "100%"],
+                correct: 2,
+                explanation: "El tercer cuartil acumula el 75% de los datos inferiores."
+            }
+        ]
+    },
     "probabilidad": {
         id: "probabilidad",
         theory: [
@@ -388,6 +503,13 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
                 options: ["Citoplasma", "Núcleo", "Mitocondria", "Ribosoma"],
                 correct: 1,
                 explanation: "En las eucariontes, el material genético está protegido dentro del núcleo."
+            },
+            {
+                id: 2,
+                text: "¿Qué organelo es responsable de la síntesis de proteínas?",
+                options: ["Lisosoma", "Ribosoma", "Aparato de Golgi", "Vacuola"],
+                correct: 1,
+                explanation: "Los ribosomas son los encargados de sintetizar proteínas a partir de la información del ARN."
             }
         ]
     },
@@ -412,6 +534,30 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
                 options: ["Las activa", "Las desnaturaliza", "No les afecta", "Las reproduce"],
                 correct: 1,
                 explanation: "Las enzimas pierden su estructura (se desnaturalizan) con temperaturas extremas, perdiendo su función."
+            }
+        ]
+    },
+    "salud_sexual": {
+        id: "salud_sexual",
+        theory: [
+            "Salud Sexual y Reproductiva: Involucra el bienestar físico, mental y social en relación con la sexualidad.",
+            "Métodos Anticonceptivos: Naturales (calendario), Barrera (condón), Hormonales (píldora), Irreversibles (ligadura).",
+            "ITS (Infecciones de Transmisión Sexual): VIH, Sífilis, Gonorrea, VPH. El preservativo es el único que previene ITS y embarazo."
+        ],
+        examples: [
+            {
+                title: "Prevención de ITS",
+                content: "¿Cuál es el método más efectivo para prevenir el VIH durante las relaciones sexuales?",
+                solution: "El uso correcto y consistente del preservativo (condón)."
+            }
+        ],
+        quiz: [
+            {
+                id: 1,
+                text: "¿Qué método anticonceptivo protege también contra las ITS?",
+                options: ["Píldora anticonceptiva", "Dispositivo intrauterino (DIU)", "Preservativo", "Método del calendario"],
+                correct: 2,
+                explanation: "El preservativo actúa como barrera física, impidiendo tanto el embarazo como el contacto con fluidos infecciosos."
             }
         ]
     },
@@ -450,6 +596,16 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
             "Diagrama de Cuerpo Libre (DCL): Representación gráfica de todas las fuerzas que actúan sobre un objeto (Peso, Normal, Tensión, Roce).",
             "Energía Mecánica: Cinética (movimiento) + Potencial (altura). Se conserva en sistemas ideales."
         ],
+        commonErrors: [
+            "Aplicar conceptos de cinemática en problemas de estática.",
+            "Error en la aplicación de la 3ra Ley de Newton (acción-reacción).",
+            "Confusión entre masa (escalar) y peso (fuerza vectorial)."
+        ],
+        strategies: [
+            "Dibuja siempre el Diagrama de Cuerpo Libre (DCL).",
+            "Identifica todas las fuerzas antes de plantear ecuaciones.",
+            "Verifica las unidades de medida."
+        ],
         examples: [
             {
                 title: "Segunda Ley de Newton",
@@ -487,6 +643,16 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
             "Logaritmo: Exponente al que hay que elevar una base para obtener un número. log_b(a) = c ↔ b^c = a.",
             "Propiedades: log(A·B) = log(A) + log(B); log(A/B) = log(A) - log(B); log(A^n) = n·log(A).",
             "Cambio de base: log_b(a) = log_k(a) / log_k(b)."
+        ],
+        commonErrors: [
+            "Dividir el argumento por la base (log(a)/log(b) ≠ log(a/b)).",
+            "Multiplicar argumento y base erróneamente.",
+            "No comprender la relación inversa con las potencias."
+        ],
+        strategies: [
+            "Recuerda la definición: base^resultado = argumento.",
+            "Usa las propiedades para simplificar expresiones complejas.",
+            "Verifica si el argumento es una potencia de la base."
         ],
         examples: [
             {
@@ -529,12 +695,47 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
             }
         ]
     },
+    "homotecia": {
+        id: "homotecia",
+        theory: [
+            "Homotecia: Transformación que cambia el tamaño de una figura pero mantiene su forma.",
+            "Centro de Homotecia (O): Punto fijo desde donde se trazan las líneas.",
+            "Razón de Homotecia (k): Relación entre la distancia de la imagen al centro y la distancia original. k = OA'/OA.",
+            "Si k > 1: Ampliación. 0 < k < 1: Reducción. k < 0: Inversión y cambio de tamaño."
+        ],
+        examples: [
+            {
+                title: "Cálculo de Imagen",
+                content: "Punto A(2,2), Centro O(0,0), Razón k=3. ¿Dónde está A'?",
+                solution: "A' = k · A = 3 · (2,2) = (6,6)."
+            }
+        ],
+        quiz: [
+            {
+                id: 1,
+                text: "Si la razón de homotecia es k = -2, la figura resultante:",
+                options: ["Se reduce a la mitad", "Se amplía al doble y se invierte", "Se mantiene igual", "Desaparece"],
+                correct: 1,
+                explanation: "El valor absoluto |k|=2 indica que se amplía al doble. El signo negativo indica que la figura se invierte respecto al centro."
+            }
+        ]
+    },
     "trigonometria": { // M2 Specific
         id: "trigonometria", // Maps to axis or topic depending on structure, here mapping to axis for simplicity or topic
         theory: [
             "Razones en triángulo rectángulo: Seno (Op/Hip), Coseno (Ady/Hip), Tangente (Op/Ady).",
             "Identidad fundamental: sen²α + cos²α = 1.",
             "Teorema del Seno y Coseno para triángulos no rectángulos."
+        ],
+        commonErrors: [
+            "Confundir seno, coseno y tangente.",
+            "Aplicar razones trigonométricas en triángulos no rectángulos.",
+            "Error al identificar cateto opuesto vs adyacente."
+        ],
+        strategies: [
+            "Dibuja el triángulo y marca el ángulo de referencia.",
+            "Usa la mnemotecnia SOH-CAH-TOA.",
+            "Verifica que la calculadora esté en grados (DEG) si usas una."
         ],
         examples: [
             {

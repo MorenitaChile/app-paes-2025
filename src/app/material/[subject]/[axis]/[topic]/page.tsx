@@ -92,6 +92,34 @@ export default function TopicPage({
                 </div>
             </section>
 
+            {(content.commonErrors || content.strategies) && (
+                <section className={styles.contentSection}>
+                    <h2 className={styles.sectionTitle}>Estrategias y Errores Comunes</h2>
+                    <div className={styles.strategiesGrid}>
+                        {content.commonErrors && (
+                            <div className={`${styles.strategyCard} ${styles.errorsCard}`}>
+                                <h3>⚠️ Errores Comunes</h3>
+                                <ul>
+                                    {content.commonErrors.map((error, idx) => (
+                                        <li key={idx}>{error}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                        {content.strategies && (
+                            <div className={`${styles.strategyCard} ${styles.tipsCard}`}>
+                                <h3>💡 Estrategias de Resolución</h3>
+                                <ul>
+                                    {content.strategies.map((strategy, idx) => (
+                                        <li key={idx}>{strategy}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </div>
+                </section>
+            )}
+
             <section className={styles.contentSection}>
                 <h2 className={styles.sectionTitle}>Ejemplos Trabajados</h2>
                 {content.examples.map((example, idx) => (
