@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import styles from './page.module.css';
 
 export default function LandingPage() {
@@ -58,30 +57,22 @@ export default function LandingPage() {
         <h2 className={styles.sectionTitle}>Todas las Materias</h2>
         <div className={styles.subjectsGrid}>
           <div className={styles.subjectCard}>
-            <div className={styles.subjectImage}>
-              <Image src="/images/onda.png" alt="Competencia Lectora" width={300} height={180} style={{ objectFit: 'contain' }} />
-            </div>
+            <div className={styles.subjectIcon}>📖</div>
             <h3>Competencia Lectora</h3>
             <p>Comprensión, interpretación y evaluación de textos</p>
           </div>
           <div className={styles.subjectCard}>
-            <div className={styles.subjectImage}>
-              <Image src="/images/celula.png" alt="Ciencias" width={300} height={180} style={{ objectFit: 'contain' }} />
-            </div>
+            <div className={styles.subjectIcon}>🔬</div>
             <h3>Ciencias</h3>
             <p>Física, Química y Biología integradas</p>
           </div>
           <div className={styles.subjectCard}>
-            <div className={styles.subjectImage}>
-              <Image src="/images/triangulo.png" alt="Matemática M1" width={300} height={180} style={{ objectFit: 'contain' }} />
-            </div>
+            <div className={styles.subjectIcon}>📐</div>
             <h3>Matemática M1</h3>
             <p>Números, Álgebra, Geometría y Probabilidad</p>
           </div>
           <div className={styles.subjectCard}>
-            <div className={styles.subjectImage}>
-              <Image src="/images/parabola.png" alt="Matemática M2" width={300} height={180} style={{ objectFit: 'contain' }} />
-            </div>
+            <div className={styles.subjectIcon}>📊</div>
             <h3>Matemática M2</h3>
             <p>Funciones, Trigonometría y Geometría Analítica</p>
           </div>
