@@ -57,18 +57,30 @@ export default function LandingPage() {
         <h2 className={styles.sectionTitle}>Todas las Materias</h2>
         <div className={styles.subjectsGrid}>
           <div className={styles.subjectCard}>
+            <div className={styles.subjectImage}>
+              <img src="/images/onda.png" alt="Competencia Lectora" />
+            </div>
             <h3>Competencia Lectora</h3>
             <p>Comprensión, interpretación y evaluación de textos</p>
           </div>
           <div className={styles.subjectCard}>
+            <div className={styles.subjectImage}>
+              <img src="/images/celula.png" alt="Ciencias" />
+            </div>
             <h3>Ciencias</h3>
             <p>Física, Química y Biología integradas</p>
           </div>
           <div className={styles.subjectCard}>
+            <div className={styles.subjectImage}>
+              <img src="/images/triangulo.png" alt="Matemática M1" />
+            </div>
             <h3>Matemática M1</h3>
             <p>Números, Álgebra, Geometría y Probabilidad</p>
           </div>
           <div className={styles.subjectCard}>
+            <div className={styles.subjectImage}>
+              <img src="/images/parabola.png" alt="Matemática M2" />
+            </div>
             <h3>Matemática M2</h3>
             <p>Funciones, Trigonometría y Geometría Analítica</p>
           </div>
