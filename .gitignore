@@ -37,3 +37,6 @@ next-env.d.ts
 
 # local db
 src/data/db.json
+
+# screenshots
+imagenes app/

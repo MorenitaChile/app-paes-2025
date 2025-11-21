@@ -86,7 +86,9 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className={styles.footer}>
-        <p>© 2025 PAES Prep. Todos los derechos reservados.</p>
+        <div className={styles.footerBottom}>
+          <p>&copy; 2025 PAES 2025. Todos los derechos reservados. v2.0.1 (Premium UI)</p>
+        </div>
       </footer>
     </div>
   );
