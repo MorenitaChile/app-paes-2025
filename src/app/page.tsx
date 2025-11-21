@@ -8,7 +8,7 @@ export default function LandingPage() {
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>
-            Prepárate para la <span className={styles.highlight}>PAES 2025</span>
+            Prepárate para la <span className={styles.highlight}>PAES 2025 (Actualizado)</span>
           </h1>
           <p className={styles.heroSubtitle}>
             La plataforma más completa para alcanzar tu mejor puntaje.
