@@ -9,6 +9,8 @@ export { ecuacionesIntermedio } from './m1/ecuaciones_intermedio';
 
 // Matemática M2
 export { logaritmosBasico } from './m2/logaritmos_basico';
+export { homoteciaBasico } from './m2/homotecia_basico';
+export { trigonometriaBasico } from './m2/trigonometria_basico';
 
 // Competencia Lectora
 export { localizarBasico } from './lectora/localizar_basico';
