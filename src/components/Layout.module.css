@@ -11,6 +11,14 @@
     min-height: 100vh;
 }
 
+.mainPublic {
+    flex: 1;
+    margin-left: 0;
+    padding: 0;
+    background-color: var(--background);
+    min-height: 100vh;
+}
+
 /* Tablet and Mobile */
 @media (max-width: 768px) {
     .main {
