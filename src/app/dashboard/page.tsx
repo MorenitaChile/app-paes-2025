@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { EssayResult, JsonDb, User } from "@/lib/db";
@@ -38,6 +39,8 @@ export default async function Home() {
           value={String(averageScore)}
           description={averageScore > 0 ? "Sigue así!" : "Completa un ensayo"}
         />
+        {/* Add a small note explaining the average */}
+        <p className={styles.note}>El promedio se calcula a partir de la suma de los puntajes de los ensayos completados dividido por la cantidad de ensayos.</p>
         <ProgressCard
           title="Ensayos Completados"
           value={String(completedEssays)}
@@ -58,15 +61,23 @@ export default async function Home() {
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>Continuar Estudiando</h2>
         <div className={styles.actions}>
-          {/* Placeholder for quick actions */}
-          <div className={styles.actionCard}>
+          {/* Wrap each action card with a Link to the appropriate study section */}
+          <Link href="/material/competencia-lectora" className={styles.actionCard}>
             <h3>Competencia Lectora</h3>
             <p>Análisis de textos argumentativos</p>
-          </div>
-          <div className={styles.actionCard}>
+          </Link>
+          <Link href="/material/matematica-m1" className={styles.actionCard}>
             <h3>Matemática M1</h3>
             <p>Geometría: Cubos y Paralelepípedos</p>
-          </div>
+          </Link>
+          <Link href="/material/ciencias" className={styles.actionCard}>
+            <h3>Ciencias</h3>
+            <p>Física, Química y Biología integradas</p>
+          </Link>
+          <Link href="/material/matematica-m2" className={styles.actionCard}>
+            <h3>Matemática M2</h3>
+            <p>Funciones, Trigonometría y Geometría Analítica</p>
+          </Link>
         </div>
       </section>
     </div>
