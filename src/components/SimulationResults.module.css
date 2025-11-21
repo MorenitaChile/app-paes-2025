@@ -1,0 +1,294 @@
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 16px;
+    padding: 2rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+}
+
+.scoreCircle {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.scoreValue {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.scoreLabel {
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    opacity: 0.9;
+}
+
+.headerInfo h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2rem;
+}
+
+.performanceLevel,
+.percentile {
+    margin: 0.25rem 0;
+    font-size: 1.125rem;
+}
+
+.quickStats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.statCard {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.statCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.statIcon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.statValue {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+}
+
+.statLabel {
+    font-size: 0.875rem;
+    color: #666;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.statSubtext {
+    font-size: 0.75rem;
+    color: #999;
+}
+
+.analysis {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.analysis h3 {
+    margin: 0 0 1.5rem 0;
+    color: #2c3e50;
+}
+
+.analysisSection {
+    margin-bottom: 1.5rem;
+}
+
+.analysisSection:last-child {
+    margin-bottom: 0;
+}
+
+.analysisHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.percentage {
+    color: #2196F3;
+    font-size: 1.125rem;
+}
+
+.progressBar {
+    height: 12px;
+    background: #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    transition: width 0.5s ease;
+}
+
+.warning {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: #FFF8E1;
+    border-left: 3px solid #FF9800;
+    font-size: 0.875rem;
+    color: #F57C00;
+}
+
+.timeDetails {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.interpretation {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.interpretation h3 {
+    margin: 0 0 1rem 0;
+    color: #2c3e50;
+}
+
+.interpretationContent p {
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.successMessage,
+.infoMessage,
+.warningMessage {
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+}
+
+.successMessage {
+    background: #E8F5E9;
+    border-left: 4px solid #4CAF50;
+    color: #2E7D32;
+}
+
+.infoMessage {
+    background: #E3F2FD;
+    border-left: 4px solid #2196F3;
+    color: #1565C0;
+}
+
+.warningMessage {
+    background: #FFF8E1;
+    border-left: 4px solid #FF9800;
+    color: #F57C00;
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.reviewButton,
+.retryButton {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.reviewButton {
+    background: #2196F3;
+    color: white;
+}
+
+.reviewButton:hover {
+    background: #1976D2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}
+
+.retryButton {
+    background: #FF9800;
+    color: white;
+}
+
+.retryButton:hover {
+    background: #F57C00;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+}
+
+.note {
+    background: #F5F5F5;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: #666;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .scoreCircle {
+        width: 120px;
+        height: 120px;
+    }
+
+    .scoreValue {
+        font-size: 2.5rem;
+    }
+
+    .headerInfo h2 {
+        font-size: 1.5rem;
+    }
+
+    .quickStats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .reviewButton,
+    .retryButton {
+        width: 100%;
+    }
+}

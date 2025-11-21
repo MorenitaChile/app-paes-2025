@@ -1,0 +1,151 @@
+.container {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    margin-bottom: 1.5rem;
+}
+
+.header h3 {
+    margin: 0 0 1rem 0;
+    color: #2c3e50;
+    font-size: 1.125rem;
+}
+
+.stats {
+    display: flex;
+    gap: 2rem;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.statValue {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2196F3;
+}
+
+.statLabel {
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: 0.25rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.questionButton {
+    aspect-ratio: 1;
+    border: 2px solid #e0e0e0;
+    background: white;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #666;
+}
+
+.questionButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.questionButton.current {
+    background: #2196F3;
+    border-color: #2196F3;
+    color: white;
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}
+
+.questionButton.answered {
+    background: #4CAF50;
+    border-color: #4CAF50;
+    color: white;
+}
+
+.questionButton.unanswered {
+    background: white;
+    border-color: #e0e0e0;
+    color: #666;
+}
+
+.questionButton.marked {
+    background: #FF9800;
+    border-color: #FF9800;
+    color: white;
+}
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.legendBox {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 2px solid;
+}
+
+.legendBox.current {
+    background: #2196F3;
+    border-color: #2196F3;
+}
+
+.legendBox.answered {
+    background: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.legendBox.unanswered {
+    background: white;
+    border-color: #e0e0e0;
+}
+
+.legendBox.marked {
+    background: #FF9800;
+    border-color: #FF9800;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+        gap: 0.375rem;
+    }
+
+    .questionButton {
+        font-size: 0.75rem;
+    }
+
+    .stats {
+        gap: 1rem;
+    }
+
+    .statValue {
+        font-size: 1.25rem;
+    }
+}

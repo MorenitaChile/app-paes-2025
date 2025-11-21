@@ -45,6 +45,7 @@ export type Simulation = {
     timeLimit: number; // minutes
     optionsCount: 4 | 5; // Number of options per question
     questions: Question[];
+    pilotIndices: number[]; // Indices of pilot questions (hidden from user)
     format: 'DEMRE'; // Official DEMRE format
 };
 
