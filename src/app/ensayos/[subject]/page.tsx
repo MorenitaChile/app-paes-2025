@@ -1,256 +1,72 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { ESSAY_BANK } from "@/data/questions";
-import { TOPIC_CONTENT } from "@/data/content";
-import { scoreMultipleChoice, calculatePAESScore } from "@/lib/scoring";
+import Link from "next/link";
 import styles from "./page.module.css";
 
-export default function EssayRunner() {
+export default function SubjectEssaysPage() {
     const params = useParams();
     const router = useRouter();
     const subject = params.subject as string;
 
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [answers, setAnswers] = useState<Record<number, number>>({}); // Store selected option index
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const [results, setResults] = useState<any>(null);
-    const [timeRemaining, setTimeRemaining] = useState(0);
-
     const essays = ESSAY_BANK[subject] || [];
-    const currentEssay = essays[0]; // For now, use first essay
 
-    useEffect(() => {
-        if (currentEssay) {
-            setTimeRemaining(currentEssay.timeLimit * 60); // Convert to seconds
-        }
-    }, [currentEssay]);
-
-    useEffect(() => {
-        if (timeRemaining > 0 && !isSubmitted) {
-            const timer = setTimeout(() => setTimeRemaining(timeRemaining - 1), 1000);
-            return () => clearTimeout(timer);
-        }
-    }, [timeRemaining, isSubmitted]);
-
-    if (!currentEssay) {
-        return (
-            <div className={styles.container}>
-                <p>No hay ensayos disponibles para este temario.</p>
-            </div>
-        );
-    }
-
-    const currentQuestion = currentEssay.questions[currentQuestionIndex];
-    const topicContent = TOPIC_CONTENT[currentQuestion.topic];
-    const totalQuestions = currentEssay.questions.length;
-
-    const formatTime = (seconds: number) => {
-        const mins = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-    };
-
-    const handleAnswerChange = (optionIndex: number) => {
-        setAnswers({ ...answers, [currentQuestionIndex]: optionIndex });
-    };
-
-    const handleNext = () => {
-        if (currentQuestionIndex < totalQuestions - 1) {
-            setCurrentQuestionIndex(currentQuestionIndex + 1);
-        }
-    };
-
-    const handlePrevious = () => {
-        if (currentQuestionIndex > 0) {
-            setCurrentQuestionIndex(currentQuestionIndex - 1);
-        }
-    };
-
-    const handleSubmit = () => {
-        // Score all answers
-        let correctCount = 0;
-        const questionResults = currentEssay.questions.map((question, index) => {
-            const userAnswer = answers[index];
-            // Default to -1 if no answer, ensuring 0 score
-            const safeUserAnswer = userAnswer !== undefined ? userAnswer : -1;
-            // Ensure correctAnswer is treated as number. In data it might be number or string (if legacy).
-            // Our converted data has number.
-            const safeCorrectAnswer = typeof question.correctAnswer === 'number' ? question.correctAnswer : -1;
-
-            const score = scoreMultipleChoice(safeUserAnswer, safeCorrectAnswer);
-            if (score === 1) correctCount++;
-
-            return {
-                questionId: question.id,
-                isCorrect: score === 1,
-                userAnswer: safeUserAnswer,
-                correctAnswer: safeCorrectAnswer,
-                solution: question.solution
-            };
-        });
-
-        const paesScore = calculatePAESScore(subject, correctCount);
-
-        const resultData = {
-            questionResults,
-            correctCount,
-            totalQuestions,
-            paesScore
-        };
-
-        setResults(resultData);
-        setIsSubmitted(true);
-
-        // Save to backend
-        fetch('/api/essays/save', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                essayId: currentEssay.id,
-                subject: currentEssay.subject,
-                score: paesScore,
-                correctAnswers: correctCount,
-                totalQuestions: totalQuestions,
-                answers: answers
-            })
-        }).catch(err => console.error('Failed to save results:', err));
-    };
-
-    if (isSubmitted && results) {
+    if (essays.length === 0) {
         return (
             <div className={styles.container}>
                 <header className={styles.header}>
-                    <h1 className={styles.title}>Resultados del Ensayo</h1>
+                    <h1 className={styles.title}>No hay ensayos disponibles</h1>
+                    <p>No se encontraron ensayos para esta materia.</p>
                 </header>
-
-                <div className={styles.resultsCard}>
-                    <div className={styles.scoreDisplay}>
-                        <h2>Puntaje PAES</h2>
-                        <div className={styles.bigScore}>{results.paesScore}</div>
-                        <p>{results.correctCount} correctas de {results.totalQuestions} preguntas</p>
-                    </div>
-
-                    <div className={styles.questionsList}>
-                        {results.questionResults.map((result: any, index: number) => (
-                            <div key={index} className={`${styles.questionResult} ${result.isCorrect ? styles.correct : styles.incorrect}`}>
-                                <h3>Pregunta {index + 1}</h3>
-                                <p>
-                                    <strong>Tu respuesta:</strong> {currentEssay.questions[index].options?.[result.userAnswer] || 'Sin responder'}
-                                </p>
-                                {!result.isCorrect && (
-                                    <p>
-                                        <strong>Respuesta correcta:</strong> {currentEssay.questions[index].options?.[result.correctAnswer]}
-                                    </p>
-                                )}
-                                <p className={styles.solution}>
-                                    <strong>Explicación:</strong> {result.solution}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className={styles.actions}>
-                        <button className="btn" onClick={() => router.push('/ensayos')}>
-                            Volver a Ensayos
-                        </button>
-                        <button className="btn btn-primary" onClick={() => window.location.reload()}>
-                            Intentar de Nuevo
-                        </button>
-                    </div>
-                </div>
+                <Link href="/ensayos" className="btn">
+                    ← Volver a Ensayos
+                </Link>
             </div>
         );
     }
+
+    const subjectNames: Record<string, string> = {
+        lectora: "Competencia Lectora",
+        ciencias: "Ciencias",
+        m1: "Matemática M1",
+        m2: "Matemática M2"
+    };
 
     return (
         <div className={styles.container}>
             <header className={styles.header}>
-                <h1 className={styles.title}>{currentEssay.title}</h1>
-                <div className={styles.timer} style={{ color: timeRemaining < 300 ? 'var(--error)' : undefined }}>
-                    {formatTime(timeRemaining)}
-                </div>
+                <h1 className={styles.title}>{subjectNames[subject] || subject}</h1>
+                <p>Selecciona un ensayo para comenzar</p>
             </header>
 
-            <div className={styles.progress}>
-                Pregunta {currentQuestionIndex + 1} de {totalQuestions}
+            <div className={styles.essaysList}>
+                {essays.map((essay, index) => (
+                    <div key={essay.id} className={styles.essayCard}>
+                        <div className={styles.essayInfo}>
+                            <h3 className={styles.essayTitle}>{essay.title}</h3>
+                            <p className={styles.essayMeta}>
+                                {essay.questions.length} preguntas • {essay.timeLimit} minutos
+                            </p>
+                            {essay.description && (
+                                <p className={styles.essayDescription}>{essay.description}</p>
+                            )}
+                        </div>
+                        <Link
+                            href={`/ensayos/${subject}/${essay.id}`}
+                            className="btn btn-primary"
+                        >
+                            Comenzar →
+                        </Link>
+                    </div>
+                ))}
             </div>
 
-            <div className={styles.questionCard}>
-                <div className={styles.questionText}>
-                    <strong>Pregunta {currentQuestionIndex + 1}:</strong>
-                    <p style={{ whiteSpace: 'pre-wrap' }}>{currentQuestion.text}</p>
-                    {currentQuestion.hints && currentQuestion.hints.length > 0 && (
-                        <details className={styles.hints}>
-                            <summary>💡 Ver pistas</summary>
-                            <ul>
-                                {currentQuestion.hints.map((hint, i) => (
-                                    <li key={i}>{hint}</li>
-                                ))}
-                            </ul>
-                        </details>
-                    )}
-
-                    {topicContent && (topicContent.strategies || topicContent.commonErrors) && (
-                        <details className={styles.strategies}>
-                            <summary>🧠 Estrategias y Errores Comunes</summary>
-                            <div className={styles.strategyContent}>
-                                {topicContent.strategies && (
-                                    <div className={styles.strategyBlock}>
-                                        <strong>Estrategias:</strong>
-                                        <ul>
-                                            {topicContent.strategies.map((s, i) => <li key={i}>{s}</li>)}
-                                        </ul>
-                                    </div>
-                                )}
-                                {topicContent.commonErrors && (
-                                    <div className={styles.strategyBlock}>
-                                        <strong>Errores Comunes:</strong>
-                                        <ul>
-                                            {topicContent.commonErrors.map((e, i) => <li key={i}>{e}</li>)}
-                                        </ul>
-                                    </div>
-                                )}
-                            </div>
-                        </details>
-                    )}
-                </div>
-
-                <div className={styles.optionsList}>
-                    {currentQuestion.options?.map((option, index) => (
-                        <label key={index} className={styles.optionLabel}>
-                            <input
-                                type="radio"
-                                name={`question-${currentQuestionIndex}`}
-                                value={index}
-                                checked={answers[currentQuestionIndex] === index}
-                                onChange={() => handleAnswerChange(index)}
-                            />
-                            <span className={styles.optionText}>{option}</span>
-                        </label>
-                    ))}
-                </div>
-
-                <div className={styles.actions}>
-                    <button
-                        className="btn"
-                        onClick={handlePrevious}
-                        disabled={currentQuestionIndex === 0}
-                    >
-                        ← Anterior
-                    </button>
-
-                    {currentQuestionIndex < totalQuestions - 1 ? (
-                        <button className="btn btn-primary" onClick={handleNext}>
-                            Siguiente →
-                        </button>
-                    ) : (
-                        <button className="btn btn-primary" onClick={handleSubmit}>
-                            Finalizar Ensayo
-                        </button>
-                    )}
-                </div>
+            <div className={styles.actions}>
+                <Link href="/ensayos" className="btn">
+                    ← Volver a Ensayos
+                </Link>
             </div>
         </div>
     );
